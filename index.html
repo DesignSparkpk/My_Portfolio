@@ -16,6 +16,7 @@
       --text-muted: #94a3b8;
       --accent: #38bdf8;
       --border: rgba(255, 255, 255, 0.1);
+      --success: #10b981;
     }
 
     * {
@@ -51,12 +52,13 @@
       padding: 2rem;
       margin-bottom: 2rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
     .glass-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+      border-color: rgba(56, 189, 248, 0.25);
     }
 
     /* Navbar */
@@ -66,6 +68,7 @@
       top: 0;
       z-index: 1000;
       border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
     }
 
     .navbar {
@@ -166,6 +169,12 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .chip:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
     }
 
     /* Services Grid */
@@ -190,11 +199,12 @@
       padding: 1.2rem;
       border-radius: 12px;
       text-align: left;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, transform 0.2s;
     }
 
     .service-box:hover {
       border-color: var(--accent);
+      transform: translateY(-3px);
     }
 
     .service-box i {
@@ -212,6 +222,71 @@
       font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.4;
+    }
+
+    /* Portfolio Projects Grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .project-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    .project-btn {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      width: max-content;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .project-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
     }
 
     /* To-Do Section */
@@ -301,31 +376,99 @@
       color: #fff;
     }
 
-    /* Contact Links */
+    /* Contact Form & Links */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contact-form input, .contact-form textarea {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .contact-form button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .contact-form button:hover {
+      background: var(--primary-hover);
+    }
+
     .contact-links {
       display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.8rem;
     }
 
     .contact-btn {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 0.6rem 1.2rem;
+      padding: 0.7rem 1.2rem;
       border-radius: 8px;
       text-decoration: none;
       font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: space-between;
       transition: all 0.2s;
+      cursor: pointer;
     }
 
     .contact-btn:hover {
-      background: var(--primary);
+      background: rgba(99, 102, 241, 0.2);
       border-color: var(--primary);
+    }
+
+    /* Toast Alert Notification */
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background-color: rgba(16, 185, 129, 0.95);
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px;
+      position: fixed;
+      z-index: 2000;
+      bottom: 30px;
+      right: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
     }
 
     footer {
@@ -336,6 +479,7 @@
     }
 
     @media (max-width: 768px) {
+      .contact-container { grid-template-columns: 1fr; }
       .toggle-btn { display: block; }
       .nav-links {
         display: none;
@@ -354,6 +498,9 @@
 </head>
 <body>
 
+  <!-- Toast Notification Container -->
+  <div id="toast"><i class="fa-solid fa-circle-check"></i> Copied to clipboard!</div>
+
   <!-- Navigation Bar -->
   <header>
     <nav class="navbar">
@@ -363,6 +510,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
         <li><a href="#todo" class="nav-link">Task Manager</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -375,7 +523,7 @@
   <main class="main-container">
     <!-- About Section -->
     <section id="about" class="glass-card">
-      <div class="profile-badge">Portfolio</div>
+      <div class="profile-badge">IT & Creative Professional</div>
       <h1 class="hero-title">Hi, I'm <span>Abdul Majid</span></h1>
       <h2 class="hero-subtitle">IT Specialist | Web Developer & Graphic Designer</h2>
       <p class="hero-desc">
@@ -419,6 +567,39 @@
       </div>
     </section>
 
+    <!-- Portfolio Projects Section -->
+    <section id="portfolio" class="glass-card">
+      <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Featured Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <div>
+            <span class="project-tag">Web Development</span>
+            <h3>Glassmorphic Portfolio</h3>
+            <p>Single-page responsive portfolio featuring dark mode aesthetics and interactive widgets.</p>
+          </div>
+          <a href="#" class="project-btn"><i class="fa-solid fa-globe"></i> View Project</a>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <span class="project-tag">Graphic Design</span>
+            <h3>DesignSpark Branding</h3>
+            <p>Social media promo banner concepts and brand graphics created for studio promos.</p>
+          </div>
+          <a href="#" class="project-btn"><i class="fa-solid fa-image"></i> View Designs</a>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <span class="project-tag">MS Excel</span>
+            <h3>Data Analytics Sheet</h3>
+            <p>Automated Excel reporting spreadsheet with VLOOKUP formulas and visual charts.</p>
+          </div>
+          <a href="#" class="project-btn"><i class="fa-solid fa-file-excel"></i> View Sheet</a>
+        </div>
+      </div>
+    </section>
+
     <!-- To-Do App Section -->
     <section id="todo" class="glass-card">
       <div class="card-header">
@@ -439,12 +620,32 @@
     <!-- Contact Section -->
     <section id="contact" class="glass-card">
       <h2 class="section-title"><i class="fa-solid fa-paper-plane"></i> Get In Touch</h2>
-      <p class="hero-desc">Feel free to reach out for project inquiries or technical support.</p>
+      <p class="hero-desc">Feel free to send a direct message or copy technical contact credentials.</p>
       
-      <div class="contact-links">
-        <a href="mailto:abdulmajid@example.com" class="contact-btn"><i class="fa-solid fa-envelope"></i> Email Me</a>
-        <a href="#" class="contact-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-        <a href="#" class="contact-btn"><i class="fa-brands fa-github"></i> GitHub</a>
+      <div class="contact-container">
+        <!-- Direct Contact Form -->
+        <form class="contact-form" action="https://formspree.io/f/xbjnqkyw" method="POST" id="contactForm">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" rows="3" placeholder="Your Message..." required></textarea>
+          <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        </form>
+
+        <!-- Quick Copy Action Links -->
+        <div class="contact-links">
+          <div class="contact-btn" onclick="copyText('abdulmajid@example.com')">
+            <span><i class="fa-solid fa-envelope"></i> Copy Email</span>
+            <i class="fa-solid fa-copy"></i>
+          </div>
+          <a href="https://linkedin.com" target="_blank" class="contact-btn">
+            <span><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+          <a href="https://github.com/DesignSparkpk" target="_blank" class="contact-btn">
+            <span><i class="fa-brands fa-github"></i> GitHub Repository</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -454,6 +655,14 @@
   </footer>
 
   <script>
+    // Copy To Clipboard Toast Function
+    function copyText(text) {
+      navigator.clipboard.writeText(text);
+      var toast = document.getElementById("toast");
+      toast.className = "show";
+      setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2500);
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
       var toggleBtn = document.getElementById("toggleBtn");
       var navLinks = document.getElementById("navLinks");
@@ -462,27 +671,33 @@
       var taskList = document.getElementById("taskList");
       var emptyMsg = document.getElementById("emptyMsg");
 
+      // Mobile Navbar Toggle
       toggleBtn.addEventListener("click", function () {
         navLinks.classList.toggle("active");
       });
 
-      function checkEmpty() {
-        var items = taskList.querySelectorAll(".task-item");
-        if (items.length === 0) {
-          emptyMsg.style.display = "block";
-        } else {
-          emptyMsg.style.display = "none";
-        }
+      // Auto close navbar on mobile link click
+      document.querySelectorAll(".nav-link").forEach(function(link) {
+        link.addEventListener("click", function() {
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // LocalStorage Helper Functions
+      function getSavedTasks() {
+        return JSON.parse(localStorage.getItem("portfolio_tasks")) || [];
       }
 
-      function addTask() {
-        var taskText = taskInput.value.trim();
+      function saveTasks(tasks) {
+        localStorage.setItem("portfolio_tasks", JSON.stringify(tasks));
+      }
 
-        if (taskText === "") {
-          alert("Please write a task first!");
-          return;
-        }
+      function checkEmpty() {
+        var items = taskList.querySelectorAll(".task-item");
+        emptyMsg.style.display = (items.length === 0) ? "block" : "none";
+      }
 
+      function renderTaskUI(taskText) {
         var li = document.createElement("li");
         li.className = "task-item";
         li.innerHTML = '<span>' + taskText + '</span><button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>';
@@ -492,11 +707,39 @@
           li.classList.add("removing");
           setTimeout(function () {
             li.remove();
+            var tasks = getSavedTasks();
+            var index = tasks.indexOf(taskText);
+            if (index > -1) {
+              tasks.splice(index, 1);
+              saveTasks(tasks);
+            }
             checkEmpty();
           }, 300);
         });
 
         taskList.appendChild(li);
+      }
+
+      // Load Saved Tasks
+      var initialTasks = getSavedTasks();
+      initialTasks.forEach(function(t) {
+        renderTaskUI(t);
+      });
+      checkEmpty();
+
+      // Add Task Action
+      function addTask() {
+        var taskText = taskInput.value.trim();
+        if (taskText === "") {
+          alert("Please write a task first!");
+          return;
+        }
+
+        renderTaskUI(taskText);
+        var tasks = getSavedTasks();
+        tasks.push(taskText);
+        saveTasks(tasks);
+
         taskInput.value = "";
         checkEmpty();
       }
