@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdul Majid | IT Specialist, Designer & Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      --card-bg: rgba(30, 41, 59, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0f172a;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-container {
+      max-width: 850px;
+      width: 90%;
+      margin: 2rem auto;
+      flex: 1;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Navbar */
+    header {
+      background: rgba(15, 23, 42, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo-accent {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    .toggle-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Profile Section */
+    .profile-badge {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin: 0.5rem 0 1rem;
+      font-weight: 600;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Services Grid */
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .service-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-align: left;
+      transition: border-color 0.2s;
+    }
+
+    .service-box:hover {
+      border-color: var(--accent);
+    }
+
+    .service-box i {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .service-box h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .service-box p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* To-Do Section */
+    .card-header .subtitle {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    .todo-input-group {
+      display: flex;
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+
+    .todo-input-group input {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border);
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .todo-input-group input:focus {
+      border-color: var(--accent);
+    }
+
+    .todo-input-group button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.3rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .todo-input-group button:hover {
+      background: var(--primary-hover);
+    }
+
+    .task-list {
+      list-style: none;
+    }
+
+    .empty-msg {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 1rem 0;
+    }
+
+    .task-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .task-item.removing {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    .delete-btn {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .delete-btn:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* Contact Links */
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .contact-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .toggle-btn { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        flex-direction: column;
+        padding: 1rem 0;
+        text-align: center;
+      }
+      .nav-links.active { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <span class="logo-accent">&lt;/&gt;</span> Abdul Majid
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#todo" class="nav-link">Task Manager</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="toggle-btn" id="toggleBtn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <!-- About Section -->
+    <section id="about" class="glass-card">
+      <div class="profile-badge">Portfolio</div>
+      <h1 class="hero-title">Hi, I'm <span>Abdul Majid</span></h1>
+      <h2 class="hero-subtitle">IT Specialist | Web Developer & Graphic Designer</h2>
+      <p class="hero-desc">
+        I am a versatile IT Specialist, Web Developer, and Graphic Designer. With expertise in building web applications, designing compelling visual assets, and handling data management using MS Excel and IT tools, I offer end-to-end digital and technical solutions.
+      </p>
+
+      <div class="skills-container">
+        <span class="chip"><i class="fa-brands fa-html5"></i> HTML5 & CSS3</span>
+        <span class="chip"><i class="fa-brands fa-js"></i> JavaScript</span>
+        <span class="chip"><i class="fa-solid fa-palette"></i> Graphic Design</span>
+        <span class="chip"><i class="fa-solid fa-pen-nib"></i> UI/UX Design</span>
+        <span class="chip"><i class="fa-solid fa-file-excel"></i> MS Excel</span>
+        <span class="chip"><i class="fa-solid fa-laptop-code"></i> IT Support</span>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="glass-card">
+      <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> What I Do</h2>
+      <div class="services-grid">
+        <div class="service-box">
+          <i class="fa-solid fa-code"></i>
+          <h3>Web Development</h3>
+          <p>Designing modern, responsive, and interactive websites using HTML, CSS, and JS.</p>
+        </div>
+        <div class="service-box">
+          <i class="fa-solid fa-paint-brush"></i>
+          <h3>Graphic Design</h3>
+          <p>Creating visually engaging social media posts, logos, and UI layout designs.</p>
+        </div>
+        <div class="service-box">
+          <i class="fa-solid fa-table"></i>
+          <h3>Excel & Data Analytics</h3>
+          <p>Managing data spreadsheets, automation formulas, and custom reporting.</p>
+        </div>
+        <div class="service-box">
+          <i class="fa-solid fa-headset"></i>
+          <h3>IT Support & Tech</h3>
+          <p>Providing technical troubleshooting, system setup, and software solutions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- To-Do App Section -->
+    <section id="todo" class="glass-card">
+      <div class="card-header">
+        <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Task Manager</h2>
+        <span class="subtitle">Organize your daily workflow</span>
+      </div>
+
+      <div class="todo-input-group">
+        <input type="text" id="taskInput" placeholder="Add a new task...">
+        <button id="addTaskBtn"><i class="fa-solid fa-plus"></i> Add</button>
+      </div>
+
+      <ul id="taskList" class="task-list">
+        <li class="empty-msg" id="emptyMsg">No tasks added yet.</li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="glass-card">
+      <h2 class="section-title"><i class="fa-solid fa-paper-plane"></i> Get In Touch</h2>
+      <p class="hero-desc">Feel free to reach out for project inquiries or technical support.</p>
+      
+      <div class="contact-links">
+        <a href="mailto:abdulmajid@example.com" class="contact-btn"><i class="fa-solid fa-envelope"></i> Email Me</a>
+        <a href="#" class="contact-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="#" class="contact-btn"><i class="fa-brands fa-github"></i> GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Abdul Majid. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var toggleBtn = document.getElementById("toggleBtn");
+      var navLinks = document.getElementById("navLinks");
+      var taskInput = document.getElementById("taskInput");
+      var addTaskBtn = document.getElementById("addTaskBtn");
+      var taskList = document.getElementById("taskList");
+      var emptyMsg = document.getElementById("emptyMsg");
+
+      toggleBtn.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+      });
+
+      function checkEmpty() {
+        var items = taskList.querySelectorAll(".task-item");
+        if (items.length === 0) {
+          emptyMsg.style.display = "block";
+        } else {
+          emptyMsg.style.display = "none";
+        }
+      }
+
+      function addTask() {
+        var taskText = taskInput.value.trim();
+
+        if (taskText === "") {
+          alert("Please write a task first!");
+          return;
+        }
+
+        var li = document.createElement("li");
+        li.className = "task-item";
+        li.innerHTML = '<span>' + taskText + '</span><button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>';
+
+        var deleteBtn = li.querySelector(".delete-btn");
+        deleteBtn.addEventListener("click", function () {
+          li.classList.add("removing");
+          setTimeout(function () {
+            li.remove();
+            checkEmpty();
+          }, 300);
+        });
+
+        taskList.appendChild(li);
+        taskInput.value = "";
+        checkEmpty();
+      }
+
+      addTaskBtn.addEventListener("click", addTask);
+
+      taskInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          addTask();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
