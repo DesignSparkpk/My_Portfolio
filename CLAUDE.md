@@ -63,3 +63,11 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+---
+
+## Project: My Portfolio
+
+- Site: single-page personal portfolio (`index.html`) for an IT Specialist, Web Developer & Graphic Designer.
+- Design styles live in `.claude/skills/`. If a request doesn't name a style, use the `choose-design-style` skill to pick one and state the choice.
+- Default style for this portfolio: **glassmorphism** (it already uses a dark navy gradient with translucent cards), with **bento-grid** as the layout for the Services/Portfolio sections when they are redesigned.
