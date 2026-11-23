@@ -64,3 +64,9 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+## Project rules: live sites
+
+- The live Bella's site (https://bellas-haripur.pages.dev) is deployed by Cloudflare Pages from the `bellas/` folder on branch `ccr-88ab82c4-9bundu`.
+- **Never delete this repository or the `ccr-88ab82c4-9bundu` branch, never force-push to it, and never rename it, without the user's explicit confirmation in the current conversation.** Deleting it stops all future updates to the live site.
+- If this branch ever has to change (for example after merging into `main`), tell the user first: they must switch the Cloudflare Pages production branch to match.
