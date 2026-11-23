@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al Arabian Mandi & Shinwari House | Haripur</title>
+  <meta name="description" content="Authentic Arabic Mandi, Shinwari karahi and BBQ in Haripur. Near CNG Adda, Tableeghi Markaz Road. Open every day. Order on WhatsApp 0336 9957193.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wood-dark: #2e1a0e;
+      --wood: #5a3219;
+      --wood-light: #7d4a26;
+      --brass: #c9a24a;
+      --brass-light: #f1d98a;
+      --brass-dark: #8f6c22;
+      --paper: #f6ecd6;
+      --paper-dark: #e8d8b4;
+      --ink: #2a1a0f;
+      --ink-muted: #6b5240;
+      --red: #8e2a1c;
+      --radius: 10px;
+      --font-display: "Playfair Display", Georgia, serif;
+      --font-body: "Lora", Georgia, serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--paper);
+      line-height: 1.6;
+      background:
+        repeating-linear-gradient(92deg, rgba(0,0,0,.07) 0 2px, transparent 2px 11px),
+        repeating-linear-gradient(88deg, rgba(255,255,255,.03) 0 1px, transparent 1px 23px),
+        linear-gradient(180deg, var(--wood) 0%, var(--wood-dark) 100%);
+      background-color: var(--wood-dark);
+    }
+    a { color: inherit; }
+    .container { max-width: 1050px; margin: 0 auto; padding: 0 1.25rem; }
+
+    /* ---------- Shared materials ---------- */
+    .panel {
+      background:
+        repeating-linear-gradient(92deg, rgba(0,0,0,.06) 0 2px, transparent 2px 9px),
+        linear-gradient(180deg, var(--wood-light), var(--wood) 45%, var(--wood-dark));
+      border-radius: var(--radius);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 6px rgba(0,0,0,.4),
+                  0 12px 28px rgba(0,0,0,.55);
+      position: relative;
+    }
+    .stitched::after {
+      content: ""; position: absolute; inset: 8px; border-radius: 6px;
+      border: 2px dashed rgba(241,217,138,.35); pointer-events: none;
+    }
+    .paper {
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.5), transparent 40%),
+        linear-gradient(180deg, var(--paper), var(--paper-dark));
+      color: var(--ink);
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 14px 30px rgba(0,0,0,.5), 0 2px 4px rgba(0,0,0,.3);
+    }
+    .btn-brass {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: linear-gradient(180deg, var(--brass-light), var(--brass) 55%, var(--brass-dark));
+      color: var(--ink); font-family: var(--font-body); font-weight: 600; font-size: 1rem;
+      text-decoration: none; padding: .8rem 1.4rem;
+      border: 1px solid #6e5216; border-radius: 8px; cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 3px 0 #5a4210, 0 6px 12px rgba(0,0,0,.45);
+      text-shadow: 0 1px 0 rgba(255,255,255,.5);
+      transition: transform .08s, box-shadow .08s;
+    }
+    .btn-brass:active { transform: translateY(2px); box-shadow: inset 0 2px 4px rgba(0,0,0,.35), 0 1px 0 #5a4210; }
+    .btn-brass:focus-visible, a:focus-visible { outline: 3px solid var(--brass-light); outline-offset: 3px; }
+    .btn-wood {
+      background: linear-gradient(180deg, var(--wood-light), var(--wood-dark));
+      color: var(--brass-light); text-shadow: 0 -1px 0 rgba(0,0,0,.6);
+      border-color: #1d0f06;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 3px 0 #1d0f06, 0 6px 12px rgba(0,0,0,.45);
+    }
+    .engraved {
+      font-family: var(--font-display); color: var(--brass-light);
+      text-shadow: 0 -1px 0 rgba(0,0,0,.7), 0 1px 0 rgba(255,255,255,.15);
+    }
+    .section { padding: 4rem 0; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); text-align: center; margin-bottom: .4rem; }
+    .section-sub { text-align: center; color: var(--paper-dark); opacity: .85; margin-bottom: 2.2rem; }
+
+    /* ---------- Header ---------- */
+    header { position: sticky; top: 0; z-index: 50; border-radius: 0; }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1.25rem; max-width: 1050px; margin: 0 auto; gap: 1rem; }
+    .brand { font-size: 1.15rem; text-decoration: none; }
+    .nav-links { display: flex; gap: 1.3rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--paper); font-weight: 600; }
+    .nav-links a:hover { color: var(--brass-light); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { text-align: center; padding: 4.5rem 0 3.5rem; }
+    .emblem {
+      width: 140px; height: 140px; margin: 0 auto 1.5rem; border-radius: 50%;
+      display: grid; place-items: center; font-size: 3.2rem;
+      background: radial-gradient(circle at 35% 30%, var(--brass-light), var(--brass) 45%, var(--brass-dark) 100%);
+      box-shadow: inset 0 3px 6px rgba(255,255,255,.5), inset 0 -6px 10px rgba(0,0,0,.35), 0 10px 25px rgba(0,0,0,.6);
+      border: 6px solid var(--wood-dark);
+    }
+    .hero h1 { font-size: clamp(2.2rem, 6.5vw, 4.2rem); line-height: 1.1; }
+    .hero .arabic { font-size: 1.6rem; color: var(--brass); margin: .4rem 0 .8rem; }
+    .hero p.tag { font-size: 1.15rem; max-width: 620px; margin: 0 auto 1.8rem; color: var(--paper-dark); }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .open-badge {
+      display: inline-block; margin-top: 1.8rem; padding: .45rem 1.1rem; border-radius: 999px;
+      background: var(--paper); color: var(--ink); font-weight: 600; font-size: .95rem;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,.25), 0 2px 0 rgba(0,0,0,.3);
+    }
+
+    /* ---------- About ---------- */
+    .about { padding: 2.5rem 2rem; max-width: 780px; margin: 0 auto; text-align: center; font-size: 1.08rem; }
+    .about h2 { font-family: var(--font-display); color: var(--red); font-size: 2rem; margin-bottom: 1rem; }
+    .about p + p { margin-top: 1rem; }
+
+    /* ---------- Menu ---------- */
+    .menu-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-bottom: 1.8rem; }
+    .menu-tabs button[aria-selected="true"] {
+      background: linear-gradient(180deg, var(--brass-dark), var(--brass));
+      box-shadow: inset 0 2px 5px rgba(0,0,0,.45); transform: translateY(2px);
+    }
+    .menu-card { padding: 2.2rem 2rem; }
+    .menu-card h3 { font-family: var(--font-display); color: var(--red); font-size: 1.7rem; text-align: center; }
+    .menu-card .note { text-align: center; color: var(--ink-muted); font-style: italic; margin-bottom: 1.4rem; }
+    .items { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.2rem 2.2rem; }
+    .item { border-bottom: 1px dashed rgba(42,26,15,.3); padding-bottom: .9rem; }
+    .item-head { display: flex; align-items: baseline; gap: .5rem; }
+    .item-name { font-weight: 600; font-size: 1.08rem; }
+    .dots { flex: 1; border-bottom: 2px dotted rgba(42,26,15,.35); transform: translateY(-4px); }
+    .price { font-weight: 600; color: var(--red); white-space: nowrap; }
+    .item-desc { color: var(--ink-muted); font-size: .93rem; margin-top: .2rem; }
+    .pill {
+      display: inline-block; font-size: .75rem; font-weight: 600; letter-spacing: .03em;
+      background: var(--red); color: var(--paper); padding: .1rem .55rem; border-radius: 999px; margin-left: .3rem;
+      vertical-align: middle;
+    }
+    .order-link { display: inline-block; margin-top: .35rem; font-size: .88rem; color: #1f6b3a; font-weight: 600; text-decoration: none; }
+    .order-link:hover { text-decoration: underline; }
+    .tax { text-align: center; margin-top: 1.6rem; font-size: .9rem; color: var(--ink-muted); }
+
+    /* ---------- Visit ---------- */
+    .visit-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 1.5rem; }
+    @media (max-width: 800px) { .visit-grid { grid-template-columns: 1fr; } }
+    .info { padding: 2rem; }
+    .info h3 { font-family: var(--font-display); color: var(--red); font-size: 1.35rem; margin: 1.2rem 0 .3rem; }
+    .info h3:first-child { margin-top: 0; }
+    .info .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.5rem; }
+    .socials { list-style: none; }
+    .socials li { margin: .2rem 0; }
+    .map-frame { padding: 12px; }
+    .map-frame iframe { width: 100%; height: 100%; min-height: 380px; border: 0; border-radius: 6px; display: block;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,.5); filter: sepia(.15); }
+
+    /* ---------- Footer ---------- */
+    footer { text-align: center; padding: 2rem 1rem 6rem; color: var(--paper-dark); font-size: .9rem; }
+
+    /* ---------- WhatsApp button ---------- */
+    .wa-float {
+      position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 60;
+      display: flex; align-items: center; gap: .55rem; text-decoration: none;
+      background: linear-gradient(180deg, #4fe07e, #25d366 55%, #1a9e4b);
+      color: #06301a; font-weight: 600; padding: .85rem 1.2rem; border-radius: 999px;
+      border: 1px solid #12783a;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 3px 0 #0f5f2e, 0 8px 18px rgba(0,0,0,.5);
+      text-shadow: 0 1px 0 rgba(255,255,255,.4);
+    }
+    .wa-float:active { transform: translateY(2px); box-shadow: inset 0 2px 4px rgba(0,0,0,.3), 0 1px 0 #0f5f2e; }
+    .wa-float svg { width: 24px; height: 24px; }
+    @media (max-width: 480px) { .wa-float span { display: none; } .wa-float { padding: .9rem; } }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <header class="panel">
+    <nav class="nav" aria-label="Main">
+      <a href="#top" class="brand engraved">Al Arabian Mandi</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <a class="btn-brass" href="tel:+923369957193">Call</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ---------- Hero ---------- -->
+    <section class="hero container">
+      <div class="emblem" aria-hidden="true">🍽️</div>
+      <h1 class="engraved">Al Arabian Mandi<br>&amp; Shinwari House</h1>
+      <p class="arabic" lang="ar" dir="rtl">مندى العربى</p>
+      <p class="tag">The rich tradition of Arabic Mandi and Shinwari cuisine, brought to Haripur for the first time.</p>
+      <div class="hero-actions">
+        <a class="btn-brass" href="#menu">View Menu</a>
+        <a class="btn-brass btn-wood" href="https://wa.me/923369957193?text=Assalam%20o%20Alaikum!%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
+      </div>
+      <span class="open-badge">Open every day · 12 PM – 12 AM</span>
+    </section>
+
+    <!-- ---------- About ---------- -->
+    <section id="about" class="section container">
+      <div class="paper about">
+        <h2>Our Story</h2>
+        <p>Welcome to Al-Arabian Mandi &amp; Shinwari House! Founded by two brothers with a passion for authentic flavors, we are proud to bring the rich tradition of Arabic Mandi and Shinwari cuisine to Haripur for the first time.</p>
+        <p>Our dishes are crafted with the finest ingredients, slow-cooked to perfection, and infused with the essence of Arabian and Pashtun heritage. Whether you're craving the aromatic flavors of Mandi or the bold taste of Shinwari, we promise an unforgettable dining experience that stays true to its roots.</p>
+        <p><strong>Join us and savor the taste of authenticity!</strong></p>
+      </div>
+    </section>
+
+    <!-- ---------- Menu ---------- -->
+    <section id="menu" class="section container">
+      <h2 class="section-title engraved">Our Menu</h2>
+      <p class="section-sub">Prices in Pakistani Rupees</p>
+      <div class="menu-tabs" role="tablist" aria-label="Menu categories"></div>
+      <div class="paper menu-card" id="menu-card" role="tabpanel" aria-live="polite"></div>
+    </section>
+
+    <!-- ---------- Visit ---------- -->
+    <section id="visit" class="section container">
+      <h2 class="section-title engraved">Visit Us</h2>
+      <p class="section-sub">Dine in, take away, or order on WhatsApp</p>
+      <div class="visit-grid">
+        <div class="paper info">
+          <h3>Location</h3>
+          <p>Near CNG Adda, Tableeghi Markaz Road,<br>Haripur, Pakistan</p>
+          <h3>Hours</h3>
+          <p>Open every day<br>12 PM – 12 AM</p>
+          <h3>Contact</h3>
+          <p>WhatsApp: <a href="https://wa.me/923369957193">0336 9957193</a><br>
+             Phone: <a href="tel:+92995309328">0995 309328</a></p>
+          <h3>Follow us</h3>
+          <ul class="socials">
+            <li>Instagram: <a href="https://www.instagram.com/al_arabianmandi/" target="_blank" rel="noopener">@al_arabianmandi</a></li>
+            <li>TikTok: <a href="https://www.tiktok.com/@alarabianmandi" target="_blank" rel="noopener">@alarabianmandi</a></li>
+            <li>Facebook: Al-Arabian Mandi &amp; Shinwari House</li>
+          </ul>
+          <div class="actions">
+            <a class="btn-brass" href="https://www.google.com/maps/dir/?api=1&destination=33.993391,72.9278215" target="_blank" rel="noopener">Get Directions</a>
+            <a class="btn-brass btn-wood" href="tel:+923369957193">Call Now</a>
+          </div>
+        </div>
+        <div class="panel stitched map-frame">
+          <iframe title="Map showing Al Arabian Mandi & Shinwari House, Haripur"
+            src="https://maps.google.com/maps?q=33.993391,72.9278215&z=16&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © Al Arabian Mandi &amp; Shinwari House, Haripur. All prices are subject to 10% KPRA sales tax.
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/923369957193?text=Assalam%20o%20Alaikum!%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener" aria-label="Order on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.94.95-3.48-.22-.36a9.43 9.43 0 1 1 7.99 4.41zm8.02-17.46A11.27 11.27 0 0 0 12.05.72C5.8.72.72 5.8.72 12.05c0 2 .52 3.95 1.52 5.66L.62 23.5l5.93-1.56a11.3 11.3 0 0 0 5.5 1.4h.01c6.24 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.87-3.32-8z"/></svg>
+    <span>Order on WhatsApp</span>
+  </a>
+
+  <script>
+    // Menu transcribed from the restaurant's printed menu. Edit prices here.
+    const WA = "923369957193";
+    const MENU = [
+      { cat: "Deals", items: [
+        ["Deal 1", "3700", "Mini Platter, Half Boneless Handi, 3 Naan, 1.5L Drink, Mint Sauce"],
+        ["Deal 2", "1800", "Half Lahori Karahi, Half Spicy Boti, 3 Naan, 1 Litre Cold Drink and Mint Sauce"],
+        ["Deal 3", "1200", "2 Leg Piece, Simple Rice, 1 NR Drink, Mint Sauce"],
+        ["Deal 4", "1100", "Half Green Boti OR Lebanese Boti, Simple Rice, 1 NR Drink, Mint Sauce"],
+        ["Deal 5", "1100", "3 Kalmi Tikka, Simple Rice, 1 NR Drink, Mint Sauce"],
+        ["Deal 6", "1450", "Half Seekh Kabab Karahi, 3 Naan, 1L Drink, Mint Sauce"],
+      ]},
+      { cat: "Mandi", note: "Savor the authentic taste of traditional Mandi, where every bite tells a story of heritage.", items: [
+        ["Mutton Mandi", "3,700", "1 KG meat with rice and tomato sauce · serves 2–3", "Advance booking"],
+        ["Full Mandi", "34,000", "Approx. 8 KG meat with rice + tomato sauce · serves 16–18", "Advance booking"],
+      ]},
+      { cat: "Arabic BBQ Platters", note: "Experience the rich, smoky flavors of authentic Arabic BBQ.", items: [
+        ["Mini Platter", "2,200", "Seekh Kabab, Reshmi Kabab, Malai Boti, Spicy Boti, Kalmi Tikka, Behari Boti, Mint Sauce, Rice with Beef or Chicken"],
+        ["Half Platter", "4,200", "Seekh Kabab, Reshmi Kabab, Malai Boti, Spicy Boti, Kalmi Tikka, Behari Boti, Mint Sauce, Rice with Beef or Chicken"],
+        ["Full Platter", "8,400", "Seekh Kabab, Reshmi Kabab, Malai Boti, Spicy Boti, Kalmi Tikka, Behari Boti, Mint Sauce, Rice with Beef or Chicken"],
+        ["Mandi Platter", "4,500", "1 pc Mandi mutton, 3 pcs Batair, 2 pcs Turkish kabab, tomato sauce and rice + 1 litre drink"],
+        ["Turkish Platter", "2,400", "6 pcs Green Boti, 6 pcs Lebanese Boti, 4 pcs Turkish Kabab with rice"],
+      ]},
+      { cat: "Karahi", items: [
+        ["Chicken White Karahi", "Half 999 · Full 1,999"],
+        ["Chicken Lahori Karahi", "Half 999 · Full 1,999"],
+        ["Chicken Shinwari Karahi", "Half 999 · Full 1,999"],
+        ["Shinwari Mutton Karahi", "1 KG 3,700"],
+        ["Lahori Mutton Karahi", "1 KG 3,700"],
+        ["Sulemani Mutton Karahi", "1 KG 3,700"],
+        ["Seekh Kabab Karahi", "Half 1,100 · Full 2,200"],
+      ]},
+      { cat: "Handi", items: [
+        ["Lahori Chili Handi", "Half 1,100 · Full 2,200"],
+        ["White Handi", "Half 1,100 · Full 2,200"],
+      ]},
+      { cat: "BBQ", items: [
+        ["Green Boti", "6 pcs 600 · 12 pcs 1,200"],
+        ["Lebanese Boti", "6 pcs 600 · 12 pcs 1,200"],
+        ["Spicy / Malai Boti", "6 pcs 600 · 12 pcs 1,200"],
+        ["Behari Boti", "6 pcs 600 · 12 pcs 1,200"],
+        ["Seekh / Reshmi Kabab", "3 pcs 700 · 6 pcs 1,400"],
+        ["Chest / Leg Piece", "400 per piece"],
+        ["Batair BBQ", "Ask for price", "12 pieces"],
+        ["Pulao", "Simple 350 · Chicken 750 · Beef 600"],
+      ]},
+      { cat: "Sides & Drinks", items: [
+        ["Kheer", "150"], ["Raita", "150"], ["Salad", "150"], ["Naan", "40"],
+        ["Mint Sauce", "150"], ["Tomato Sauce", "150"],
+        ["Drink (1.5L)", "220"], ["Drink (1L)", "160"], ["Water (L)", "110"],
+      ]},
+    ];
+
+    const tabs = document.querySelector(".menu-tabs");
+    const card = document.getElementById("menu-card");
+    const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+    function show(i) {
+      const { cat, note, items } = MENU[i];
+      tabs.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-selected", j === i));
+      card.innerHTML = `<h3>${esc(cat)}</h3>${note ? `<p class="note">${esc(note)}</p>` : '<p class="note">&nbsp;</p>'}
+        <div class="items">${items.map(([name, price, desc, tag]) => {
+          const isNum = /^[\d,]+$/.test(price);
+          const msg = encodeURIComponent(`Assalam o Alaikum! I would like to order: ${name}`);
+          return `<div class="item">
+            <div class="item-head"><span class="item-name">${esc(name)}${tag ? `<span class="pill">${esc(tag)}</span>` : ""}</span>
+              <span class="dots"></span><span class="price">${isNum ? "Rs " : ""}${esc(price)}</span></div>
+            ${desc ? `<p class="item-desc">${esc(desc)}</p>` : ""}
+            <a class="order-link" href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener">Order on WhatsApp →</a>
+          </div>`;
+        }).join("")}</div>
+        <p class="tax">All prices are subject to 10% KPRA sales tax.</p>`;
+    }
+
+    MENU.forEach((m, i) => {
+      const b = document.createElement("button");
+      b.className = "btn-brass btn-wood";
+      b.setAttribute("role", "tab");
+      b.textContent = m.cat;
+      b.addEventListener("click", () => show(i));
+      tabs.appendChild(b);
+    });
+    show(0);
+  </script>
+</body>
+</html>
