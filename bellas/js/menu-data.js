@@ -28,7 +28,7 @@ window.BELLAS = {
     phoneDisplay: "0336 1131166",
     phoneIntl: "+923361131166",
     whatsapp: "923361131166",            // international format, no "+" or spaces
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Bella%27s%20Darvesh%20Haripur",
+    mapsUrl: "https://share.google/X2epxqUVzjVTLgzhY",   // exact Google Maps place (shared from the listing)
     rating: 4.6,                         // Google rating
     reviewCount: 1105,                   // Google reviews
     timezone: "Asia/Karachi",
