@@ -28,7 +28,7 @@ window.BELLAS = {
     phoneDisplay: "0336 1131166",
     phoneIntl: "+923361131166",
     whatsapp: "923361131166",            // international format, no "+" or spaces
-    mapsUrl: "https://share.google/X2epxqUVzjVTLgzhY",   // exact Google Maps place (shared from the listing)
+    mapsUrl: "https://maps.google.com/?cid=5048793112688946254",   // opens Bella's exact pin in Google Maps (verified: AKTHER NAWAZ KHAN, Darvesh, 33.99522, 72.92458)
     rating: 4.6,                         // Google rating
     reviewCount: 1105,                   // Google reviews
     timezone: "Asia/Karachi",
