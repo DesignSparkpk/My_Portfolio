@@ -15,7 +15,7 @@
   const $ = (sel, el = document) => el.querySelector(sel);
   const $$ = (sel, el = document) => Array.from(el.querySelectorAll(sel));
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const money = (n) => `${B.currency} ${Number(n).toLocaleString('en-US')}`;
+  const money = (n) => `${B.currency}\u00A0${Number(n).toLocaleString("en-US")}`;   // no-break space: "Rs" never wraps away from the amount
   const icon = (name) => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"></use></svg>`;
   const waUrl = (text) => `https://wa.me/${B.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
   // Open WhatsApp in a new tab; if the browser blocks the new tab, go there in this tab instead.
@@ -48,7 +48,10 @@
     area: B.area,
     rating: Number(B.rating).toFixed(1),
     reviewCount: Number(B.reviewCount).toLocaleString('en-US'),
-    year: String(new Date().getFullYear())
+    year: String(new Date().getFullYear()),
+    deliveryInfo: B.delivery
+      ? `Free delivery within ${B.delivery.freeWithinKm}\u00A0km, ${money(B.delivery.feeBeyond)} beyond that.`
+      : null
   };
   $$('[data-bind]').forEach((el) => { const v = BINDINGS[el.dataset.bind]; if (v != null) el.textContent = v; });
 
@@ -425,7 +428,7 @@
       </li>`;
     }).join('');
 
-    $('[data-cart-total]').textContent = money(cartTotals().total);
+    renderTotals();
   }
 
   function updateCartUI(bump) {
@@ -488,13 +491,45 @@
     toast('Order cleared');
   });
 
+  /* Delivery charge: free within B.delivery.freeWithinKm, B.delivery.feeBeyond further away. */
+  const distanceField = $('[data-distance-field]');
+  const deliveryRow = $('[data-delivery-row]');
+  if (distanceField && B.delivery) {
+    const km = B.delivery.freeWithinKm;
+    $('[data-distance-options]', distanceField).innerHTML = `
+      <input type="radio" name="distance" id="dist-near" value="near" checked>
+      <label for="dist-near"><span>Within ${km} km</span><small>Free delivery</small></label>
+      <input type="radio" name="distance" id="dist-far" value="far">
+      <label for="dist-far"><span>Over ${km} km</span><small>+ ${money(B.delivery.feeBeyond)}</small></label>`;
+  } else if (distanceField) {
+    distanceField.remove();
+  }
+  function deliveryCharge() {
+    const fd = new FormData(orderForm);
+    if (!B.delivery || fd.get('type') !== 'delivery') return null;   // null = no delivery on this order
+    return fd.get('distance') === 'far' ? B.delivery.feeBeyond : 0;
+  }
+  function renderTotals() {
+    const sub = cartTotals().total;
+    const fee = deliveryCharge();
+    $('[data-cart-total]').textContent = money(sub);
+    if (deliveryRow) {
+      deliveryRow.hidden = fee === null;
+      $('[data-cart-delivery]', deliveryRow).textContent = fee ? money(fee) : 'Free';
+    }
+    const grand = $('[data-cart-grand]');
+    if (grand) grand.textContent = money(sub + (fee || 0));
+  }
+
   function syncOrderType() {
     const type = new FormData(orderForm).get('type');
     const delivery = type === 'delivery';
     addressField.hidden = !delivery;
     addressInput.required = delivery;
+    if (distanceField && B.delivery) distanceField.hidden = !delivery;
+    renderTotals();
   }
-  orderForm.addEventListener('change', (e) => { if (e.target.name === 'type') syncOrderType(); });
+  orderForm.addEventListener('change', (e) => { if (e.target.name === 'type' || e.target.name === 'distance') syncOrderType(); });
   syncOrderType();
 
   function firstInvalid(form) {
@@ -516,6 +551,8 @@
     const address = String(fd.get('address') || '').trim();
     const note = String(fd.get('note') || '').trim();
     const { total } = cartTotals();
+    const fee = deliveryCharge();
+    const km = B.delivery ? B.delivery.freeWithinKm : 0;
 
     const message = [
       `${GREETING}I'd like to place an order:`,
@@ -523,6 +560,8 @@
       ...Array.from(cart.values()).map((l) => `• ${l.qty} × ${lineLabel(l)} — ${money(lineTotal(l))}`),
       '',
       `Subtotal: ${money(total)}`,
+      fee === null ? null : `Delivery: ${fee ? `${money(fee)} (over ${km} km)` : `Free (within ${km} km)`}`,
+      fee === null ? null : `Total: ${money(total + fee)}`,
       `Order type: ${TYPE_LABEL[type] || type}`,
       `Name: ${name}`,
       type === 'delivery' ? `Address: ${address}` : null,

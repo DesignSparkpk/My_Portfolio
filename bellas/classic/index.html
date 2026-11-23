@@ -201,7 +201,7 @@
         <div class="menu__results" id="menu-panel" role="tabpanel" data-menu>
           <noscript><p class="menu__empty">Please enable JavaScript to see the menu, or call us on 0336 1131166.</p></noscript>
         </div>
-        <p class="menu__note">Prices are in PKR and may change. Delivery charges, if any, are confirmed on WhatsApp.</p>
+        <p class="menu__note">Prices in PKR and may change. <span data-bind="deliveryInfo">Free delivery within 5 km, Rs 100 beyond that.</span></p>
       </div>
     </section>
 
@@ -450,6 +450,10 @@
               <label for="order-address">Delivery address</label>
               <textarea class="input" id="order-address" name="address" rows="2" autocomplete="street-address" placeholder="House / street / nearby landmark" required></textarea>
             </div>
+            <fieldset class="field" data-distance-field>
+              <legend class="legend">How far are you from Bella's?</legend>
+              <div class="seg seg--2" data-distance-options></div>
+            </fieldset>
             <div class="field">
               <label for="order-note">Note for the kitchen <span class="optional">(optional)</span></label>
               <input class="input" id="order-note" name="note" type="text" placeholder="e.g. less spicy, extra sauce">
@@ -459,10 +463,9 @@
       </div>
 
       <footer class="drawer__foot" data-cart-foot hidden>
-        <div class="drawer__total">
-          <span>Subtotal</span>
-          <strong data-cart-total>Rs 0</strong>
-        </div>
+        <div class="drawer__total drawer__total--sub"><span>Subtotal</span><span data-cart-total>Rs 0</span></div>
+        <div class="drawer__total drawer__total--sub" data-delivery-row hidden><span>Delivery</span><span data-cart-delivery>Free</span></div>
+        <div class="drawer__total"><span>Total</span><strong data-cart-grand>Rs 0</strong></div>
         <button class="btn btn--wa-solid btn--lg btn--block" type="submit" form="order-form">
           <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>Send order on WhatsApp
         </button>

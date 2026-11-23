@@ -34,6 +34,7 @@ Everything lives in **`js/menu-data.js`**:
 - Mark something sold out: `available: false`.
 - Add a dish: copy an existing `{ ... }` block and change it.
 - Phone, WhatsApp number, hours and rating are under `business`.
+- Delivery rule (free within 5 km, Rs 100 beyond) is `business.delivery`. It shows on the site, in the order total and in the WhatsApp message. **Confirm it with Bella's.**
 
 Items marked `[MENU CARD]` were read from Bella's printed menu. Items marked `[ESTIMATE]` are placeholders,
 so **confirm them with the restaurant** before the site goes live.

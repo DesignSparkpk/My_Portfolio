@@ -450,3 +450,12 @@ select.input { appearance: none; -webkit-appearance: none; padding-right: 2.5rem
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* Delivery distance choice + subtotal / delivery / total rows */
+.seg--2 { grid-template-columns: repeat(2, 1fr); }
+.seg--2 label { gap: 0; padding: .45rem .5rem; line-height: 1.2; text-align: center; }
+.seg--2 label small { font-size: .74rem; font-weight: 600; }
+[data-distance-field][hidden], [data-delivery-row][hidden] { display: none; }
+.sheet__total--sub { font-size: .92rem; }
+.sheet__total--sub span:last-child { color: var(--ink); font-weight: 700; }
+.sheet__hint { text-wrap: pretty; }

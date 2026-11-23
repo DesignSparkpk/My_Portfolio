@@ -679,3 +679,11 @@ input[type="date"].input::-webkit-calendar-picker-indicator { filter: invert(.8)
 /* Tapping anywhere on a dish card adds it to the order (js/app.js). */
 .dish { cursor: pointer; }
 .dish.is-soldout { cursor: default; }
+
+/* Delivery distance choice + subtotal / delivery / total rows */
+.seg--2 { grid-template-columns: repeat(2, 1fr); }
+.seg--2 label { gap: 0; padding: .45rem .5rem; line-height: 1.2; text-align: center; }
+.seg--2 label small { font-size: .74rem; font-weight: 600; opacity: .8; }
+[data-distance-field][hidden], [data-delivery-row][hidden] { display: none; }
+.drawer__total--sub { font-size: .92rem; }
+.drawer__total--sub span:last-child { color: var(--text); font-weight: 600; }

@@ -39,6 +39,10 @@ window.BELLAS = {
       days: "Every day"
     },
     currency: "Rs",
+    delivery: {                          // [CONFIRM] with Bella's
+      freeWithinKm: 5,                   // free delivery up to this distance
+      feeBeyond: 100                     // Rs, charged when the address is farther away
+    },
     credit: { name: "DesignSpark", url: "" }
   },
 
