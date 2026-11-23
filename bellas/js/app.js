@@ -18,6 +18,11 @@
   const money = (n) => `${B.currency} ${Number(n).toLocaleString('en-US')}`;
   const icon = (name) => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"></use></svg>`;
   const waUrl = (text) => `https://wa.me/${B.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+  // Open WhatsApp in a new tab; if the browser blocks the new tab, go there in this tab instead.
+  const openWhatsApp = (url) => {
+    const w = window.open(url, '_blank');
+    if (w) { try { w.opener = null; } catch (_) { /* cross-origin */ } } else { window.location.href = url; }
+  };
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
   const GREETING = `Assalam-o-Alaikum ${B.name}! `;
@@ -366,9 +371,10 @@
     const sizeLabel = size ? size.label : null;
     const key = cartKey(item.id, sizeLabel);
 
-    if (e.target.closest('[data-add]')) {
+    const tappedCard = !e.target.closest('button, .sizes, .stepper');   // tap anywhere else on the card = add
+    if (e.target.closest('[data-add]') || tappedCard) {
       addToCart(item, sizeLabel);
-      refreshCard(card, '[data-inc]');
+      refreshCard(card, tappedCard ? null : '[data-inc]');
       toast(`Added ${item.name}${sizeLabel ? ` (${sizeLabel})` : ''}`);
     } else if (e.target.closest('[data-inc]')) {
       changeQty(key, +1);
@@ -432,8 +438,8 @@
     pill.classList.toggle('is-visible', count > 0);
     pillText.textContent = count ? `${count} ${count === 1 ? 'item' : 'items'} · ${money(total)}` : 'Your order';
     actionOrder.classList.toggle('has-order', count > 0);
-    actionOrderLabel.textContent = count ? 'Your order' : 'WhatsApp';
-    $('use', actionOrder).setAttribute('href', count ? '#i-shopping-bag' : '#i-whatsapp');
+    actionOrderLabel.textContent = count ? 'Your order' : (actionOrder.dataset.emptyLabel || 'WhatsApp');
+    $('use', actionOrder).setAttribute('href', count ? '#i-shopping-bag' : `#i-${actionOrder.dataset.emptyIcon || 'whatsapp'}`);
     if (dialog.open) renderCart();
   }
 
@@ -523,7 +529,7 @@
       note ? `Note: ${note}` : null
     ].filter((v) => v !== null).join('\n');
 
-    window.open(waUrl(message), '_blank', 'noopener');
+    openWhatsApp(waUrl(message));
     toast('Opening WhatsApp…');
   });
 
@@ -564,7 +570,7 @@
       note ? `Note: ${note}` : null
     ].filter((v) => v !== null).join('\n');
 
-    window.open(waUrl(message), '_blank', 'noopener');
+    openWhatsApp(waUrl(message));
     toast('Opening WhatsApp…');
   });
 

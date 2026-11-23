@@ -4,6 +4,17 @@ Demo website for **Bella's**, a family restaurant in Darvesh, Haripur, made for 
 It's plain HTML, CSS and JavaScript with no build step, so it works on any static host
 (GitHub Pages, Netlify, Cloudflare Pages) and opens straight from the folder.
 
+## Designs
+
+| Folder | Look |
+|---|---|
+| `index.html` (main) | Bright and modern, in the restaurant's real colours: cream, sage green, navy, wood and the chevron floor pattern. The menu comes right after the hero |
+| `classic/` | Dark "moonlit" theme (first version) |
+| `glass/` | Liquid Glass night theme |
+
+All three share `js/menu-data.js` (menu and prices) and `js/app.js` (ordering), so edit prices once.
+Tapping anywhere on a dish card adds it to the order.
+
 ## What's inside
 
 | Feature | Notes |

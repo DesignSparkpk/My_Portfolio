@@ -3,19 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Bella's — Family Restaurant in Darvesh, Haripur · Open till 2 AM</title>
-  <meta name="description" content="Bella's is a family restaurant in Darvesh, Haripur serving pizza, pasta, steaks, ice-cream shakes, bubble tea and cold coffee. Open every day 9 AM – 2 AM. Order or book a table on WhatsApp: 0336 1131166.">
-  <!-- DEMO VERSION: delete the next line when the site goes live so Google can index it. -->
+  <title>Bella's · Family Restaurant in Darvesh, Haripur · Open till 2 AM</title>
+  <meta name="description" content="Bella's, Darvesh, Haripur: pizza, pasta, steaks, ice-cream shakes, bubble tea and cold coffee. Open every day 9 AM – 2 AM. Order or book a table on WhatsApp: 0336 1131166.">
+  <!-- DEMO VERSION: delete the next line when the site goes live. -->
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#0C0D10">
-  <meta property="og:type" content="restaurant">
-  <meta property="og:title" content="Bella's — Darvesh, Haripur · Open till 2 AM">
-  <meta property="og:description" content="Pizza, pasta, shakes & bubble tea. Order or book a table on WhatsApp.">
+  <meta name="theme-color" content="#FBF8F1">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/playfair-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/kaushan-script.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" href="assets/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/bright.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -25,24 +20,12 @@
     "priceRange": "Rs 1,000 – 4,000",
     "telephone": "+923361131166",
     "acceptsReservations": "True",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Darvesh, Haripur",
-      "addressRegion": "Khyber Pakhtunkhwa",
-      "postalCode": "22620",
-      "addressCountry": "PK"
-    },
-    "openingHoursSpecification": [{
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "09:00",
-      "closes": "02:00"
-    }]
+    "address": { "@type": "PostalAddress", "streetAddress": "Akhtar Nawaz Khan", "addressLocality": "Darvesh, Haripur", "addressRegion": "Khyber Pakhtunkhwa", "postalCode": "22620", "addressCountry": "PK" },
+    "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "02:00" }]
   }
   </script>
 </head>
 <body>
-  <!-- Icon sprite (Lucide, ISC licence · WhatsApp glyph from Simple Icons, CC0) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
       <symbol id="i-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></symbol>
@@ -77,31 +60,34 @@
 
   <a class="skip-link" href="#menu">Skip to menu</a>
 
-  <!-- ============ NAVBAR ============ -->
+  <!-- ============ HEADER ============ -->
   <header class="nav" data-nav>
-    <div class="container nav__inner">
-      <a class="brand" href="#top" aria-label="Bella's — back to top">
-        <span class="brand__name">Bella's<svg class="brand__chili" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 7.2c2.1-.2 3.4 1.2 4 3.3.9 3.6 3.9 7 9.5 8.7-5.6 2.2-12.4.4-14.6-4.7-1.1-2.5-.9-5.3 1.1-7.3z" fill="#E5484D"/><path d="M7.6 7.4C7 5.6 7.6 4 9.3 2.9" fill="none" stroke="#5DBB63" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-        <span class="brand__sub">Darvesh · Haripur</span>
+    <div class="nav__inner wrap">
+      <a class="brand" href="#top" aria-label="Bella's, back to top">
+        <span class="brand__name">Bella's</span>
+        <svg class="brand__chili" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 7.2c2.1-.2 3.4 1.2 4 3.3.9 3.6 3.9 7 9.5 8.7-5.6 2.2-12.4.4-14.6-4.7-1.1-2.5-.9-5.3 1.1-7.3z" fill="#D2402F"/><path d="M7.6 7.4C7 5.6 7.6 4 9.3 2.9" fill="none" stroke="#4E6645" stroke-width="1.8" stroke-linecap="round"/></svg>
       </a>
 
       <nav class="nav__links" id="nav-links" aria-label="Main">
         <a href="#menu">Menu</a>
-        <a href="#about">Our Place</a>
-        <a href="#visit">Visit Us</a>
-        <a href="#book">Book a Table</a>
+        <a href="#about">Why Bella's</a>
+        <a href="#visit">Visit</a>
+        <a href="#book">Book a table</a>
       </nav>
 
       <div class="nav__actions">
-        <a class="btn btn--ghost btn--sm nav__call" href="tel:+923361131166" data-link="call">
+        <a class="btn btn--soft nav__menu-btn" href="#menu">
+          <svg class="icon" aria-hidden="true"><use href="#i-utensils-crossed"></use></svg><span>Menu</span>
+        </a>
+        <a class="btn btn--ghost nav__call" href="tel:+923361131166" data-link="call">
           <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg><span data-bind="phoneDisplay">0336 1131166</span>
         </a>
-        <button class="cart-btn" type="button" data-open-cart aria-label="Open your order">
+        <button class="btn btn--ink nav__order" type="button" data-open-cart aria-label="Open your order">
           <svg class="icon" aria-hidden="true"><use href="#i-shopping-bag"></use></svg>
-          <span class="cart-btn__label">Order</span>
-          <span class="cart-count" data-cart-count hidden>0</span>
+          <span class="nav__order-label">Order</span>
+          <span class="badge" data-cart-count hidden>0</span>
         </button>
-        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu" data-nav-toggle>
+        <button class="round-btn nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu" data-nav-toggle>
           <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
         </button>
       </div>
@@ -111,86 +97,54 @@
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__sky" aria-hidden="true"></div>
-      <div class="container hero__grid">
+      <div class="wrap hero__grid">
         <div class="hero__copy">
           <p class="status" data-status>
             <span class="status__dot" aria-hidden="true"></span>
             <span data-status-text>Open every day · 9 AM – 2 AM</span>
           </p>
-          <p class="eyebrow">Family Restaurant · Darvesh, Haripur</p>
-          <h1 class="hero__title" id="hero-title">Pizza, shakes &amp; long nights <em>under the moon.</em></h1>
-          <p class="hero__lead">Cheesy pizzas, creamy pastas, thick ice-cream shakes and bubble tea — served in Darvesh every day from <strong>9&nbsp;AM till 2&nbsp;AM</strong>.</p>
+          <h1 class="hero__title" id="hero-title">Pizza, pasta &amp; shakes, <span class="serif">till 2&nbsp;AM.</span></h1>
+          <p class="hero__lead">Darvesh's family restaurant. Pick your dishes below and send the order straight to our WhatsApp.</p>
           <div class="hero__cta">
-            <a class="btn btn--primary btn--lg" href="#menu">
-              Explore Menu
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            <a class="btn btn--ink btn--lg" href="#menu">
+              <svg class="icon" aria-hidden="true"><use href="#i-shopping-bag"></use></svg>Order now
             </a>
-            <a class="btn btn--wa btn--lg" href="https://wa.me/923361131166" target="_blank" rel="noopener" data-link="whatsapp">
-              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
-              Order / Book on WhatsApp
+            <a class="btn btn--ghost btn--lg" href="#book">
+              <svg class="icon" aria-hidden="true"><use href="#i-calendar-days"></use></svg>Book a table
             </a>
           </div>
-          <ul class="proof" aria-label="Highlights">
-            <li>
-              <span class="proof__big"><span data-bind="rating">4.6</span><svg class="icon icon--fill" aria-hidden="true"><use href="#i-star"></use></svg></span>
-              <span class="proof__label">Google rating</span>
-            </li>
-            <li>
-              <span class="proof__big">1,100+</span>
-              <span class="proof__label">Happy reviews</span>
-            </li>
-            <li>
-              <span class="proof__big">2 AM</span>
-              <span class="proof__label">Open every night</span>
-            </li>
-          </ul>
         </div>
 
-        <div class="hero__visual">
-          <div class="moon-glow" aria-hidden="true"></div>
-          <figure class="hero__photo">
-            <picture>
-              <source srcset="assets/img/dining-room.webp" type="image/webp">
-              <img src="assets/img/dining-room.jpg" width="460" height="770" fetchpriority="high"
-                   alt="Inside Bella's: the glowing moon wall above a marble dining table with grey chairs and pendant lights">
-            </picture>
-          </figure>
-          <div class="float-card float-card--top">
-            <span class="float-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-moon"></use></svg></span>
-            <span><strong>Our moonlit dining room</strong><small>Family seating · Darvesh</small></span>
-          </div>
-          <div class="float-card float-card--bottom">
-            <span class="float-card__stars" aria-hidden="true">
-              <svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg>
-            </span>
-            <span><strong><span data-bind="rating">4.6</span> on Google</strong><small><span data-bind="reviewCount">1,105</span> reviews</small></span>
-          </div>
-        </div>
+        <figure class="hero__photo">
+          <picture>
+            <source srcset="assets/img/exterior.webp" type="image/webp">
+            <img src="assets/img/exterior.jpg" width="680" height="690" fetchpriority="high"
+                 alt="Bella's building in Darvesh: grey walls, wooden facade and the golden B logo">
+          </picture>
+          <a class="hero__rating" href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">
+            <svg class="icon icon--fill" aria-hidden="true"><use href="#i-star"></use></svg>
+            <strong data-bind="rating">4.6</strong>
+            <span><span data-bind="reviewCount">1,105</span> Google reviews</span>
+          </a>
+        </figure>
       </div>
     </section>
 
-    <!-- ============ TICKER ============ -->
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker__track">
-        <span>Pizza</span><span>Pasta</span><span>Steaks</span><span>Burgers</span><span>Ice Cream Shakes</span><span>Bubble Tea</span><span>Cold Coffee</span><span>Open till 2 AM</span>
-        <span>Pizza</span><span>Pasta</span><span>Steaks</span><span>Burgers</span><span>Ice Cream Shakes</span><span>Bubble Tea</span><span>Cold Coffee</span><span>Open till 2 AM</span>
-      </div>
-    </div>
+    <div class="chevron" aria-hidden="true"></div>
 
-    <!-- ============ MENU ============ -->
-    <section class="section menu" id="menu" aria-labelledby="menu-title">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow">The Menu</p>
-          <h2 id="menu-title">Something for every <em>craving</em></h2>
-          <p>Tap <strong>Add</strong> on anything you like, then send your order straight to us on WhatsApp. No app or sign-up needed.</p>
-        </div>
+    <!-- ============ MENU (right after the hero) ============ -->
+    <section class="section section--menu" id="menu" aria-labelledby="menu-title">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">Our menu</p>
+          <h2 id="menu-title">Tap a dish to add it.</h2>
+          <p class="head__lead">When you're ready, open <strong>Your order</strong> and send it to us on WhatsApp with your name and address. No app needed.</p>
+        </header>
 
         <label class="search">
           <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
           <span class="sr-only">Search the menu</span>
-          <input class="search__input" type="search" placeholder="Search: pizza, Nutella, mango…" autocomplete="off" data-search>
+          <input class="search__input" type="search" placeholder="Search pizza, Nutella, mango…" autocomplete="off" data-search>
         </label>
 
         <div class="tabs-wrap" data-tabs-wrap>
@@ -199,117 +153,106 @@
 
         <p class="menu__summary" data-menu-summary aria-live="polite"></p>
         <div class="menu__results" id="menu-panel" role="tabpanel" data-menu>
-          <noscript><p class="menu__empty">Please enable JavaScript to see the menu, or call us on 0336 1131166.</p></noscript>
+          <noscript><p class="menu__empty">Please enable JavaScript to see the menu, or call 0336 1131166.</p></noscript>
         </div>
-        <p class="menu__note">Prices are in PKR and may change. Delivery charges, if any, are confirmed on WhatsApp.</p>
+        <p class="menu__note">Prices in PKR and may change. Any delivery charge is confirmed on WhatsApp.</p>
       </div>
     </section>
 
     <!-- ============ WHY BELLA'S ============ -->
-    <section class="section about" id="about" aria-labelledby="about-title">
-      <div class="container about__grid">
-        <div class="about__intro">
-          <p class="eyebrow">Why Bella's</p>
-          <h2 id="about-title">Made for long evenings &amp; <em>late cravings</em></h2>
-          <p class="about__lead">A glowing moon wall, marble tables and comfortable family seating. Bella's is Darvesh's spot for a proper family dinner, a birthday with friends, or a midnight shake after a long day.</p>
-          <a class="rating-card" href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">
-            <span class="rating-card__score" data-bind="rating">4.6</span>
-            <span class="rating-card__body">
-              <span class="rating-card__stars" aria-hidden="true">
-                <svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg>
-              </span>
-              <span>Rated by <strong><span data-bind="reviewCount">1,105</span> guests</strong> on Google</span>
-              <span class="rating-card__link">Read the reviews <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></span>
-            </span>
-          </a>
-        </div>
+    <section class="section section--about" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">Why Bella's</p>
+          <h2 id="about-title">A bright room for <span class="serif">long dinners</span>.</h2>
+        </header>
 
-        <div class="features">
-          <article class="feature">
-            <span class="feature__icon"><svg class="icon" aria-hidden="true"><use href="#i-moon"></use></svg></span>
-            <h3>Open till 2 AM, every day</h3>
-            <p>Dinner ran late? Craving something at midnight? Our kitchen is open from 9&nbsp;AM to 2&nbsp;AM, seven days a week.</p>
+        <div class="bento">
+          <a class="tile tile--rating" href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">
+            <p class="tile__label">Loved in Haripur</p>
+            <p class="big-score" data-bind="rating">4.6</p>
+            <span class="stars" aria-hidden="true"><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg><svg class="icon icon--fill"><use href="#i-star"></use></svg></span>
+            <p class="tile__sub"><span data-bind="reviewCount">1,105</span> reviews on Google</p>
+            <span class="tile__link">Read reviews <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></span>
+          </a>
+
+          <figure class="tile tile--photo w2">
+            <picture>
+              <source srcset="assets/img/dining-room.webp" type="image/webp">
+              <img src="assets/img/dining-room.jpg" width="460" height="770" loading="lazy" alt="The glowing moon wall above a marble table inside Bella's">
+            </picture>
+            <figcaption>The moon wall, our most photographed corner</figcaption>
+          </figure>
+
+          <article class="tile tile--sage">
+            <span class="tile__icon"><svg class="icon" aria-hidden="true"><use href="#i-moon"></use></svg></span>
+            <h3>Open till 2 AM</h3>
+            <p class="tile__sub">Every day from 9&nbsp;AM. Late dinner or a midnight shake, we're here.</p>
           </article>
-          <article class="feature">
-            <span class="feature__icon"><svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg></span>
-            <h3>Family-friendly seating</h3>
-            <p>Comfortable seating and a calm, cosy dining room that works for families and big groups.</p>
+
+          <article class="tile">
+            <span class="tile__icon"><svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg></span>
+            <h3>Family seating</h3>
+            <p class="tile__sub">Comfortable booths and big tables for families and groups.</p>
           </article>
-          <article class="feature">
-            <span class="feature__icon"><svg class="icon" aria-hidden="true"><use href="#i-chef-hat"></use></svg></span>
-            <h3>Fresh &amp; fast</h3>
-            <p>Pizzas hot from the oven, pasta tossed to order and shakes blended when you ask. No long waits.</p>
-          </article>
-          <article class="feature">
-            <span class="feature__icon"><svg class="icon" aria-hidden="true"><use href="#i-party-popper"></use></svg></span>
+
+          <article class="tile tile--glow w2">
+            <span class="tile__icon"><svg class="icon" aria-hidden="true"><use href="#i-party-popper"></use></svg></span>
             <h3>Birthdays &amp; get-togethers</h3>
-            <p>Planning a celebration or a night out with friends? Message us and we'll get a table ready for your group.</p>
+            <p class="tile__sub">Planning something? Book a table and tell us the occasion. We'll have it ready.</p>
+            <a class="tile__link" href="#book">Book a table <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+          </article>
+
+          <article class="tile">
+            <span class="tile__icon"><svg class="icon" aria-hidden="true"><use href="#i-chef-hat"></use></svg></span>
+            <h3>Fresh &amp; fast</h3>
+            <p class="tile__sub">Pizza hot from the oven, shakes blended when you order.</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ============ VISIT + BOOK ============ -->
-    <section class="section visit" id="visit" aria-labelledby="visit-title">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow">Visit Us</p>
-          <h2 id="visit-title">Find us in <em>Darvesh</em></h2>
-          <p>Drop in, call ahead or book your table on WhatsApp. We reply quickly.</p>
-        </div>
+    <section class="section section--visit" id="visit" aria-labelledby="visit-title">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">Visit us</p>
+          <h2 id="visit-title">Find us in <span class="serif">Darvesh</span>.</h2>
+        </header>
 
-        <div class="visit__grid">
-          <div class="card info-card">
-            <div class="info-row">
-              <span class="info-row__icon"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"></use></svg></span>
-              <div>
-                <h3>Location</h3>
-                <p data-bind="address">Darvesh, Haripur, Khyber Pakhtunkhwa 22620, Pakistan</p>
-              </div>
-            </div>
-            <div class="info-row">
-              <span class="info-row__icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg></span>
-              <div>
-                <h3>Opening hours</h3>
-                <p><span data-bind="days">Every day</span> · <span data-bind="hours">9:00 AM – 2:00 AM</span></p>
-                <p class="status status--inline" data-status><span class="status__dot" aria-hidden="true"></span><span data-status-text>Open every day</span></p>
-              </div>
-            </div>
-            <div class="info-row">
-              <span class="info-row__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg></span>
-              <div>
-                <h3>Call or WhatsApp</h3>
-                <p><a class="inline-link" href="tel:+923361131166" data-link="call" data-bind="phoneDisplay">0336 1131166</a></p>
-              </div>
-            </div>
-
+        <div class="visit">
+          <div class="card">
+            <ul class="facts">
+              <li>
+                <span class="facts__icon"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"></use></svg></span>
+                <span><small>Address</small>Akhtar Nawaz Khan, <span data-bind="area">Darvesh, Haripur</span> 22620</span>
+              </li>
+              <li>
+                <span class="facts__icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg></span>
+                <span><small>Hours</small><span data-bind="days">Every day</span> · <span data-bind="hours">9:00 AM – 2:00 AM</span></span>
+              </li>
+              <li>
+                <span class="facts__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+                <span><small>Phone &amp; WhatsApp</small><a href="tel:+923361131166" data-link="call" data-bind="phoneDisplay">0336 1131166</a></span>
+              </li>
+            </ul>
             <div class="visit__actions">
-              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">
+              <a class="btn btn--ink" href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">
                 <svg class="icon" aria-hidden="true"><use href="#i-navigation"></use></svg>Directions
               </a>
               <a class="btn btn--ghost" href="tel:+923361131166" data-link="call">
-                <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>Call now
+                <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>Call
               </a>
               <a class="btn btn--wa visit__wa" href="https://wa.me/923361131166" target="_blank" rel="noopener" data-link="whatsapp">
-                <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>Message on WhatsApp
+                <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>Chat on WhatsApp
               </a>
             </div>
-
-            <p class="tip">
-              <svg class="icon" aria-hidden="true"><use href="#i-flame"></use></svg>
-              <span>Evenings get busy. For family tables after 9 PM, book ahead on WhatsApp.</span>
-            </p>
+            <p class="status status--small" data-status><span class="status__dot" aria-hidden="true"></span><span data-status-text>Open every day</span></p>
           </div>
 
-          <form class="card book-card" id="book" data-book-form novalidate>
-            <div class="book-card__head">
-              <span class="feature__icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar-days"></use></svg></span>
-              <div>
-                <h3>Book a table</h3>
-                <p>Fill this in and it opens WhatsApp with your request ready to send.</p>
-              </div>
-            </div>
-
+          <form class="card book" id="book" data-book-form novalidate>
+            <h3 class="book__title"><svg class="icon" aria-hidden="true"><use href="#i-calendar-days"></use></svg>Book a table</h3>
+            <p class="book__lead">Fill this in and WhatsApp opens with your booking request ready to send.</p>
             <div class="form-grid">
               <div class="field field--full">
                 <label for="book-name">Your name</label>
@@ -338,14 +281,12 @@
               </div>
               <div class="field field--full">
                 <label for="book-note">Anything else? <span class="optional">(optional)</span></label>
-                <textarea class="input" id="book-note" name="note" rows="3" placeholder="e.g. family section, high chair, birthday cake…"></textarea>
+                <textarea class="input" id="book-note" name="note" rows="2" placeholder="Family section, high chair, birthday cake…"></textarea>
               </div>
             </div>
-
             <button class="btn btn--wa-solid btn--lg btn--block" type="submit">
               <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>Book on WhatsApp
             </button>
-            <p class="form-hint">We'll confirm your table on WhatsApp.</p>
           </form>
         </div>
       </div>
@@ -354,92 +295,78 @@
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <span class="brand__name">Bella's<svg class="brand__chili" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 7.2c2.1-.2 3.4 1.2 4 3.3.9 3.6 3.9 7 9.5 8.7-5.6 2.2-12.4.4-14.6-4.7-1.1-2.5-.9-5.3 1.1-7.3z" fill="#E5484D"/><path d="M7.6 7.4C7 5.6 7.6 4 9.3 2.9" fill="none" stroke="#5DBB63" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-          <p>Family restaurant in Darvesh, Haripur. Pizza, pasta, shakes, bubble tea and late nights under the moon.</p>
-        </div>
-        <div>
-          <h3 class="footer__title">Visit</h3>
-          <p data-bind="area">Darvesh, Haripur</p>
-          <p>Khyber Pakhtunkhwa, Pakistan</p>
-          <a class="inline-link" href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">Get directions</a>
-        </div>
-        <div>
-          <h3 class="footer__title">Hours</h3>
-          <p data-bind="days">Every day</p>
-          <p data-bind="hours">9:00 AM – 2:00 AM</p>
-        </div>
-        <div>
-          <h3 class="footer__title">Contact</h3>
-          <p><a class="inline-link" href="tel:+923361131166" data-link="call" data-bind="phoneDisplay">0336 1131166</a></p>
-          <p><a class="inline-link" href="https://wa.me/923361131166" target="_blank" rel="noopener" data-link="whatsapp">WhatsApp us</a></p>
-        </div>
+    <div class="chevron chevron--light" aria-hidden="true"></div>
+    <div class="wrap footer__grid">
+      <div class="footer__brand">
+        <span class="brand__name">Bella's</span>
+        <p>Family restaurant in Darvesh, Haripur. Pizza, pasta, shakes and bubble tea, every day till 2&nbsp;AM.</p>
       </div>
-      <div class="footer__bottom">
-        <p>© <span data-bind="year">2026</span> Bella's · Darvesh, Haripur</p>
-        <p data-credit>Website by DesignSpark</p>
-      </div>
+      <div><h3>Visit</h3><p data-bind="area">Darvesh, Haripur</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">Get directions</a></div>
+      <div><h3>Hours</h3><p data-bind="days">Every day</p><p data-bind="hours">9:00 AM – 2:00 AM</p></div>
+      <div><h3>Contact</h3><a href="tel:+923361131166" data-link="call" data-bind="phoneDisplay">0336 1131166</a><a href="https://wa.me/923361131166" target="_blank" rel="noopener" data-link="whatsapp">WhatsApp us</a></div>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© <span data-bind="year">2026</span> Bella's · Darvesh, Haripur</p>
+      <p data-credit>Website by DesignSpark</p>
     </div>
   </footer>
 
-  <!-- ============ FLOATING ORDER PILL (desktop/tablet) ============ -->
+  <!-- Floating order button (tablet / desktop) -->
   <button class="cart-pill" type="button" data-open-cart data-cart-pill aria-label="View your order">
     <svg class="icon" aria-hidden="true"><use href="#i-shopping-bag"></use></svg>
     <span data-cart-pill-text>Your order</span>
-    <span class="cart-pill__cta">View <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></span>
+    <span class="cart-pill__go">Send on WhatsApp <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></span>
   </button>
 
-  <!-- ============ MOBILE QUICK ACTIONS ============ -->
-  <nav class="action-bar" aria-label="Quick actions">
-    <a class="action-bar__btn" href="tel:+923361131166" data-link="call">
+  <!-- Bottom bar (phones) -->
+  <nav class="dock" aria-label="Quick actions">
+    <a class="dock__btn" href="tel:+923361131166" data-link="call">
       <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg><span>Call</span>
     </a>
-    <a class="action-bar__btn" href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">
-      <svg class="icon" aria-hidden="true"><use href="#i-navigation"></use></svg><span>Directions</span>
+    <a class="dock__btn" href="#menu">
+      <svg class="icon" aria-hidden="true"><use href="#i-utensils-crossed"></use></svg><span>Menu</span>
     </a>
-    <a class="action-bar__btn action-bar__main" href="https://wa.me/923361131166" target="_blank" rel="noopener" data-link="whatsapp" data-action-order>
-      <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
-      <span data-action-order-label>WhatsApp</span>
-      <span class="cart-count" data-cart-count hidden>0</span>
+    <a class="dock__btn" href="https://www.google.com/maps/search/?api=1&amp;query=Bella%27s%20Darvesh%20Haripur" target="_blank" rel="noopener" data-link="maps">
+      <svg class="icon" aria-hidden="true"><use href="#i-navigation"></use></svg><span>Map</span>
+    </a>
+    <!-- Empty order: goes to the menu. With items: opens the order sheet (js/app.js). -->
+    <a class="dock__btn dock__main" href="#menu" data-action-order data-empty-label="Order" data-empty-icon="shopping-bag">
+      <svg class="icon" aria-hidden="true"><use href="#i-shopping-bag"></use></svg>
+      <span data-action-order-label>Order</span>
+      <span class="badge" data-cart-count hidden>0</span>
     </a>
   </nav>
 
-  <!-- ============ ORDER DRAWER ============ -->
-  <dialog class="drawer" data-cart-dialog aria-labelledby="cart-title">
-    <div class="drawer__panel">
-      <header class="drawer__head">
+  <!-- ============ ORDER SHEET ============ -->
+  <dialog class="sheet" data-cart-dialog aria-labelledby="cart-title">
+    <div class="sheet__panel">
+      <header class="sheet__head">
         <div>
-          <p class="eyebrow eyebrow--plain">WhatsApp order</p>
+          <p class="kicker">WhatsApp order</p>
           <h2 id="cart-title">Your order</h2>
         </div>
-        <button class="icon-btn" type="button" data-close-cart aria-label="Close order">
+        <button class="round-btn" type="button" data-close-cart aria-label="Close order">
           <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
         </button>
       </header>
 
-      <div class="drawer__body">
+      <div class="sheet__body">
         <div class="cart-empty" data-cart-empty>
           <span class="cart-empty__icon"><svg class="icon" aria-hidden="true"><use href="#i-shopping-bag"></use></svg></span>
           <h3>Your order is empty</h3>
-          <p>Add a few favourites from the menu. You'll send the order to us on WhatsApp at the end.</p>
-          <button class="btn btn--primary" type="button" data-browse-menu>Browse the menu</button>
+          <p>Tap any dish on the menu to add it, then send the order to us on WhatsApp.</p>
+          <button class="btn btn--ink" type="button" data-browse-menu>Browse the menu</button>
         </div>
 
         <div data-cart-filled hidden>
           <ul class="cart-lines" data-cart-lines></ul>
-
           <form class="order-form" id="order-form" data-order-form novalidate>
             <fieldset class="field">
               <legend class="legend">How would you like it?</legend>
               <div class="seg">
-                <input type="radio" name="type" id="type-delivery" value="delivery" checked>
-                <label for="type-delivery">Delivery</label>
-                <input type="radio" name="type" id="type-pickup" value="pickup">
-                <label for="type-pickup">Pickup</label>
-                <input type="radio" name="type" id="type-dinein" value="dinein">
-                <label for="type-dinein">Dine-in</label>
+                <input type="radio" name="type" id="type-delivery" value="delivery" checked><label for="type-delivery">Delivery</label>
+                <input type="radio" name="type" id="type-pickup" value="pickup"><label for="type-pickup">Pickup</label>
+                <input type="radio" name="type" id="type-dinein" value="dinein"><label for="type-dinein">Dine-in</label>
               </div>
             </fieldset>
             <div class="field">
@@ -448,24 +375,22 @@
             </div>
             <div class="field" data-address-field>
               <label for="order-address">Delivery address</label>
-              <textarea class="input" id="order-address" name="address" rows="2" autocomplete="street-address" placeholder="House / street / nearby landmark" required></textarea>
+              <textarea class="input" id="order-address" name="address" rows="2" autocomplete="street-address" placeholder="House, street, nearby landmark" required></textarea>
             </div>
             <div class="field">
               <label for="order-note">Note for the kitchen <span class="optional">(optional)</span></label>
-              <input class="input" id="order-note" name="note" type="text" placeholder="e.g. less spicy, extra sauce">
+              <input class="input" id="order-note" name="note" type="text" placeholder="Less spicy, extra sauce…">
             </div>
           </form>
         </div>
       </div>
 
-      <footer class="drawer__foot" data-cart-foot hidden>
-        <div class="drawer__total">
-          <span>Subtotal</span>
-          <strong data-cart-total>Rs 0</strong>
-        </div>
+      <footer class="sheet__foot" data-cart-foot hidden>
+        <div class="sheet__total"><span>Subtotal</span><strong data-cart-total>Rs 0</strong></div>
         <button class="btn btn--wa-solid btn--lg btn--block" type="submit" form="order-form">
           <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>Send order on WhatsApp
         </button>
+        <p class="sheet__hint">Opens WhatsApp to <strong data-bind="phoneDisplay">0336 1131166</strong> with your order filled in.</p>
         <button class="link-btn" type="button" data-clear-cart>
           <svg class="icon" aria-hidden="true"><use href="#i-trash-2"></use></svg>Clear order
         </button>

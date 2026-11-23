@@ -5,10 +5,10 @@
    ===================================================================== */
 
 /* ---------- Fonts (self-hosted, SIL OFL) ---------- */
-@font-face { font-family: "Inter"; src: url("../assets/fonts/inter-var.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
-@font-face { font-family: "Playfair Display"; src: url("../assets/fonts/playfair-var.woff2") format("woff2"); font-weight: 400 900; font-style: normal; font-display: swap; }
-@font-face { font-family: "Playfair Display"; src: url("../assets/fonts/playfair-var-italic.woff2") format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
-@font-face { font-family: "Kaushan Script"; src: url("../assets/fonts/kaushan-script.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../../assets/fonts/inter-var.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Playfair Display"; src: url("../../assets/fonts/playfair-var.woff2") format("woff2"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Playfair Display"; src: url("../../assets/fonts/playfair-var-italic.woff2") format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "Kaushan Script"; src: url("../../assets/fonts/kaushan-script.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 
 /* ---------- Design tokens ---------- */
 :root {
@@ -675,3 +675,7 @@ input[type="date"].input::-webkit-calendar-picker-indicator { filter: invert(.8)
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .ticker__track { animation: none; }
 }
+
+/* Tapping anywhere on a dish card adds it to the order (js/app.js). */
+.dish { cursor: pointer; }
+.dish.is-soldout { cursor: default; }
