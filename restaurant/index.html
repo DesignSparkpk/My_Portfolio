@@ -2,175 +2,225 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Al Arabian Mandi & Shinwari House | Haripur</title>
   <meta name="description" content="Authentic Arabic Mandi, Shinwari karahi and BBQ in Haripur. Near CNG Adda, Tableeghi Markaz Road. Open every day. Order on WhatsApp 0336 9957193.">
-  <meta name="theme-color" content="#3b1f12">
+  <meta name="theme-color" content="#2b160c">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    /* Minimalism base + Bento Grid layout, colors from the restaurant's printed menu */
+    /* Minimalism base + Bento Grid tiles; colors from the restaurant's printed menu */
     :root {
       --bg: #faf6ef;
       --surface: #ffffff;
       --cream: #f3e9d8;
-      --brown: #3b1f12;
-      --brown-2: #5a3220;
-      --terracotta: #d0643a;
-      --terracotta-dark: #b04f29;
-      --gold: #d9a443;
-      --text: #24150d;
-      --muted: #6f5d52;
-      --line: #eadfce;
-      --green: #1f9d55;
-      --radius: 22px;
+      --brown: #2b160c;
+      --brown-2: #4a2717;
+      --terracotta: #c95f34;
+      --terracotta-dark: #a94b24;
+      --gold: #d6a24a;
+      --text: #23140c;
+      --muted: #75655a;
+      --line: #ebe1d2;
+      --wa: #25d366;
+      --radius: 20px;
       --radius-sm: 14px;
-      --gap: 14px;
-      --shadow: 0 1px 2px rgba(59,31,18,.06), 0 8px 24px rgba(59,31,18,.07);
+      --shadow: 0 1px 2px rgba(43,22,12,.05), 0 10px 30px rgba(43,22,12,.07);
       --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
       --font-display: "Playfair Display", Georgia, serif;
-      --maxw: 1120px;
+      --maxw: 1140px;
+      --dock-h: 68px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.55;
-           -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6;
+           -webkit-font-smoothing: antialiased; padding-bottom: 170px; }
     a { color: inherit; }
     button { font: inherit; cursor: pointer; }
-    :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
-    .container { max-width: var(--maxw); margin: 0 auto; padding-inline: 1.1rem; }
-    section { padding: 3.5rem 0; scroll-margin-top: 130px; }
-    h2.title { font-family: var(--font-display); font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.1; letter-spacing: -.01em; }
-    .sub { color: var(--muted); margin: .4rem 0 1.6rem; }
+    svg { flex: none; }
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 8px; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding-inline: 1.25rem; }
+    section { padding: 5rem 0; scroll-margin-top: 70px; }
 
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
-      border: none; border-radius: 999px; padding: .8rem 1.3rem; font-weight: 600; text-decoration: none;
-      transition: transform .15s, background .2s; }
+    .head { text-align: center; max-width: 640px; margin: 0 auto 2.5rem; }
+    .eyebrow { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--terracotta); }
+    .head h2 { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 2.8rem); line-height: 1.15; margin: .4rem 0 .6rem; color: var(--brown); }
+    .head p { color: var(--muted); }
+    .divider { width: 56px; height: 2px; background: var(--gold); margin: 1rem auto 0; border: 0; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border: none; border-radius: 999px;
+      padding: .85rem 1.5rem; font-weight: 600; text-decoration: none; transition: transform .15s, background .2s, color .2s; }
     .btn:active { transform: scale(.97); }
     .btn-primary { background: var(--terracotta); color: #fff; }
     .btn-primary:hover { background: var(--terracotta-dark); }
-    .btn-light { background: #fff; color: var(--brown); }
-    .btn-ghost { background: transparent; color: var(--brown); border: 1.5px solid var(--line); }
-    .btn-green { background: var(--green); color: #fff; }
+    .btn-outline { border: 1.5px solid rgba(255,255,255,.5); color: #fff; }
+    .btn-outline:hover { background: rgba(255,255,255,.1); }
 
     /* ---------- Header ---------- */
-    header { position: sticky; top: 0; z-index: 40; background: rgba(250,246,239,.9);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 1rem; }
+    header { position: sticky; top: 0; z-index: 40; background: rgba(250,246,239,.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 66px; }
     .logo { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 700; color: var(--brown); }
     .logo-mark { width: 38px; height: 38px; border-radius: 50%; background: var(--brown); color: var(--gold);
-      display: grid; place-items: center; font-family: var(--font-display); font-size: 1.1rem; }
-    .nav-links { display: flex; gap: 1.6rem; list-style: none; font-weight: 500; }
+      display: grid; place-items: center; font-family: var(--font-display); font-size: 1.15rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; font-weight: 500; }
     .nav-links a { text-decoration: none; color: var(--muted); }
     .nav-links a:hover { color: var(--brown); }
-    @media (max-width: 720px) { .nav-links { display: none; } .logo span.full { display: none; } }
-
-    /* ---------- Bento ---------- */
-    .bento { display: grid; gap: var(--gap); grid-template-columns: repeat(4, 1fr); }
-    .tile { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow);
-      position: relative; overflow: hidden; }
-    .span-2 { grid-column: span 2; } .span-3 { grid-column: span 3; } .span-4 { grid-column: span 4; }
-    .row-2 { grid-row: span 2; }
-    .tile-dark { background: var(--brown); color: #fff; }
-    .tile-terra { background: var(--terracotta); color: #fff; }
-    .tile-cream { background: var(--cream); }
-    .tile .label { font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .75; }
-    .tile .big { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.1; margin: .3rem 0; }
-    @media (max-width: 900px) { .bento { grid-template-columns: repeat(2, 1fr); } .span-3, .span-4 { grid-column: span 2; } }
-    @media (max-width: 560px) { .bento { grid-template-columns: 1fr; } .span-2, .span-3, .span-4 { grid-column: auto; } .row-2 { grid-row: auto; } }
+    .nav .btn { justify-self: end; padding: .6rem 1.2rem; }
+    @media (max-width: 760px) { .nav { grid-template-columns: 1fr auto; } .nav-links { display: none; } }
 
     /* ---------- Hero ---------- */
-    .hero { padding-top: 1.5rem; }
-    .hero-main { padding: clamp(1.8rem, 4vw, 3rem); display: flex; flex-direction: column; justify-content: space-between; min-height: 360px;
-      background:
-        radial-gradient(120% 80% at 100% 0%, rgba(217,164,67,.35), transparent 55%),
-        radial-gradient(90% 70% at 0% 100%, rgba(208,100,58,.35), transparent 60%),
-        var(--brown); }
-    .hero-main h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.02; letter-spacing: -.02em; margin: .6rem 0 .3rem; }
-    .hero-main .arabic { color: var(--gold); font-size: 1.4rem; }
-    .hero-main p { color: rgba(255,255,255,.8); max-width: 34ch; margin: .6rem 0 1.4rem; }
-    .hero-actions { display: flex; gap: .7rem; flex-wrap: wrap; }
-    .stars { color: var(--gold); letter-spacing: 2px; }
+    .hero { background:
+        radial-gradient(70% 90% at 85% 0%, rgba(214,162,74,.28), transparent 60%),
+        radial-gradient(60% 80% at 10% 100%, rgba(201,95,52,.3), transparent 60%),
+        var(--brown);
+      color: #fff; text-align: center; padding: 5.5rem 0 0; }
+    .hero .eyebrow { color: var(--gold); }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 4.8rem); line-height: 1.05; letter-spacing: -.01em; margin: .8rem 0 .4rem; }
+    .hero .arabic { color: var(--gold); font-size: 1.5rem; }
+    .hero .lead { color: rgba(255,255,255,.78); max-width: 520px; margin: 1rem auto 2rem; font-size: 1.08rem; }
+    .hero-actions { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 4rem; border-top: 1px solid rgba(255,255,255,.14); }
+    .stat { padding: 1.6rem 1rem; }
+    .stat + .stat { border-left: 1px solid rgba(255,255,255,.14); }
+    .stat b { display: block; font-family: var(--font-display); font-size: clamp(1.15rem, 2.5vw, 1.6rem); font-weight: 600; }
+    .stat span { color: rgba(255,255,255,.65); font-size: .85rem; }
+    .stars { color: var(--gold); }
+    @media (max-width: 560px) { .stat { padding: 1.2rem .4rem; } .stat span { font-size: .75rem; } }
 
-    /* ---------- About ---------- */
-    .about p { color: var(--muted); max-width: 62ch; }
-    .about p + p { margin-top: .9rem; }
+    /* ---------- Story ---------- */
+    .story { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .story .head { text-align: left; margin: 0 0 1rem; }
+    .story .divider { margin-left: 0; }
+    .story p { color: var(--muted); }
+    .story p + p { margin-top: 1rem; }
+    .highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .hl { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); min-height: 150px;
+      display: flex; flex-direction: column; justify-content: flex-end; }
+    .hl:nth-child(1) { background: var(--brown); color: #fff; }
+    .hl:nth-child(4) { background: var(--terracotta); color: #fff; }
+    .hl .ico { font-size: 1.6rem; margin-bottom: auto; }
+    .hl b { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+    .hl span { font-size: .88rem; opacity: .75; }
+    @media (max-width: 860px) { .story { grid-template-columns: 1fr; gap: 2rem; } .story .head { text-align: center; } .story .divider { margin-left: auto; } }
 
-    /* ---------- Category bar ---------- */
-    .catbar { position: sticky; top: 64px; z-index: 30; background: var(--bg); padding: .7rem 0; border-bottom: 1px solid var(--line); }
-    .cats { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; }
-    .cats::-webkit-scrollbar { display: none; }
-    .cats a { flex: none; text-decoration: none; padding: .5rem 1rem; border-radius: 999px; background: var(--surface);
-      border: 1px solid var(--line); font-weight: 500; font-size: .92rem; color: var(--brown); white-space: nowrap; }
-    .cats a.active { background: var(--brown); color: #fff; border-color: var(--brown); }
+    /* ---------- Deals ---------- */
+    .deals-wrap { background: var(--cream); }
+    .deals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .deal { background: var(--surface); border-radius: var(--radius); padding: 1.6rem; box-shadow: var(--shadow); cursor: pointer;
+      display: flex; flex-direction: column; gap: .7rem; border: 2px solid transparent; transition: transform .2s, border-color .2s; user-select: none; }
+    .deal:hover { transform: translateY(-3px); }
+    .deal.in-cart { border-color: var(--terracotta); }
+    .deal-top { display: flex; justify-content: space-between; align-items: center; }
+    .deal-name { font-family: var(--font-display); font-size: 1.45rem; font-weight: 600; color: var(--brown); }
+    .deal-price { background: var(--brown); color: #fff; font-weight: 700; padding: .3rem .8rem; border-radius: 999px; font-size: .95rem; }
+    .deal-desc { color: var(--muted); font-size: .93rem; flex: 1; }
+    .deal-foot { display: flex; justify-content: space-between; align-items: center; padding-top: .8rem; border-top: 1px dashed var(--line); min-height: 52px; }
+    .deal-hint { font-size: .85rem; color: var(--terracotta); font-weight: 600; }
+    @media (max-width: 900px) { .deals { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .deals { grid-template-columns: 1fr; } }
 
     /* ---------- Menu ---------- */
-    .menu-cat { padding: 2.2rem 0 .5rem; scroll-margin-top: 140px; }
-    .menu-cat h3 { font-family: var(--font-display); font-size: 1.6rem; color: var(--brown); }
-    .menu-cat .note { color: var(--muted); font-size: .95rem; margin: .2rem 0 1rem; }
-    .items { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
-    .item { background: var(--surface); border-radius: var(--radius-sm); padding: 1.1rem 1.1rem 1rem; box-shadow: var(--shadow);
-      display: flex; flex-direction: column; gap: .35rem; border: 1.5px solid transparent; transition: border-color .2s; }
-    .item.in-cart { border-color: var(--terracotta); }
-    .item-name { font-weight: 700; font-size: 1.05rem; color: var(--brown); }
-    .tag { display: inline-block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
-      background: #fdecdf; color: var(--terracotta-dark); padding: .15rem .5rem; border-radius: 999px; margin-left: .35rem; vertical-align: middle; }
-    .item-desc { color: var(--muted); font-size: .88rem; }
-    .opts { margin-top: auto; padding-top: .5rem; display: flex; flex-direction: column; gap: .45rem; }
-    .opt { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
-    .opt-info { font-size: .92rem; }
-    .opt-info b { color: var(--text); font-weight: 600; }
+    .catbar { position: sticky; top: 66px; z-index: 30; background: rgba(250,246,239,.96); padding: .75rem 0; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+    .cats { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; justify-content: center; }
+    .cats::-webkit-scrollbar { display: none; }
+    @media (max-width: 760px) { .cats { justify-content: flex-start; } }
+    .cats a { flex: none; text-decoration: none; padding: .5rem 1.1rem; border-radius: 999px; background: var(--surface);
+      border: 1px solid var(--line); font-weight: 500; font-size: .92rem; color: var(--brown); white-space: nowrap; }
+    .cats a.active { background: var(--brown); color: #fff; border-color: var(--brown); }
+    .menu-cat { padding-top: 2.5rem; scroll-margin-top: 140px; }
+    .cat-head { text-align: center; margin-bottom: 1.4rem; }
+    .cat-head h3 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 600; color: var(--brown); }
+    .cat-head p { color: var(--muted); font-size: .95rem; }
+    .dishes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 820px) { .dishes { grid-template-columns: 1fr; } }
+    .dish { background: var(--surface); border-radius: var(--radius-sm); padding: 1.1rem 1.25rem; box-shadow: var(--shadow);
+      display: grid; grid-template-columns: 1fr auto; gap: .4rem 1.2rem; align-items: center; border: 1.5px solid transparent; transition: border-color .2s; }
+    .dish.in-cart { border-color: var(--terracotta); }
+    .dish-name { font-weight: 700; color: var(--brown); font-size: 1.02rem; }
+    .dish-desc { color: var(--muted); font-size: .86rem; line-height: 1.5; margin-top: .15rem; }
+    .tag { display: inline-block; font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+      background: #fbe9dd; color: var(--terracotta-dark); padding: .15rem .5rem; border-radius: 999px; margin-left: .4rem; vertical-align: 2px; }
+    .opts { display: flex; flex-direction: column; gap: .45rem; align-items: stretch; }
+    .opt { display: grid; grid-template-columns: auto 96px; align-items: center; gap: .8rem; justify-content: end; }
+    .opt-info { text-align: right; font-size: .9rem; white-space: nowrap; }
     .opt-info span { color: var(--muted); margin-right: .35rem; }
-    .add { background: var(--cream); color: var(--brown); border: none; border-radius: 999px; padding: .5rem 1rem; font-weight: 600; min-width: 92px; }
-    .add:hover { background: #ecdcc2; }
-    .stepper { display: inline-flex; align-items: center; background: var(--terracotta); color: #fff; border-radius: 999px; min-width: 92px; justify-content: space-between; }
-    .stepper button { background: none; border: none; color: #fff; width: 34px; height: 34px; font-size: 1.15rem; font-weight: 700; border-radius: 50%; }
-    .stepper button:hover { background: rgba(255,255,255,.15); }
-    .stepper output { min-width: 22px; text-align: center; font-weight: 700; }
-    .ask { font-size: .9rem; font-weight: 600; color: var(--green); text-decoration: none; }
-    .tax-note { color: var(--muted); font-size: .85rem; margin-top: 1.5rem; text-align: center; }
+    .opt-info b { font-weight: 600; }
+    @media (max-width: 480px) {
+      .dish { grid-template-columns: 1fr; }
+      .opt { grid-template-columns: 1fr 96px; }
+      .opt-info { text-align: left; }
+    }
+
+    .add { width: 96px; height: 36px; background: var(--cream); color: var(--brown); border: none; border-radius: 999px; font-weight: 600; }
+    .add:hover { background: #eadbc1; }
+    .stepper { width: 96px; height: 36px; display: inline-flex; align-items: center; justify-content: space-between;
+      background: var(--terracotta); color: #fff; border-radius: 999px; }
+    .stepper button { background: none; border: none; color: #fff; width: 34px; height: 36px; font-size: 1.15rem; font-weight: 700; border-radius: 50%; }
+    .stepper output { font-weight: 700; }
+    .ask { font-size: .88rem; font-weight: 600; color: #178a47; text-decoration: none; white-space: nowrap; }
 
     /* ---------- Visit ---------- */
-    .map-tile { padding: 0; min-height: 320px; }
-    .map-tile iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .contact-list { list-style: none; display: grid; gap: .3rem; margin-top: .4rem; }
-    .contact-list a { text-decoration: none; font-weight: 600; }
-    footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 2rem 1rem; }
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 860px) { .visit { grid-template-columns: 1fr; } }
+    .map { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); min-height: 420px; background: var(--cream); position: relative; }
+    .map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .info { background: var(--brown); color: #fff; border-radius: var(--radius); padding: 2.2rem; display: grid; gap: 1.4rem; align-content: start; }
+    .info h4 { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+    .info p, .info li { color: rgba(255,255,255,.85); }
+    .info ul { list-style: none; }
+    .info a { text-decoration: none; font-weight: 600; color: #fff; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    @media (max-width: 420px) { .info-grid { grid-template-columns: 1fr; } }
 
-    /* ---------- Cart bar ---------- */
-    .cart-bar { position: fixed; left: 50%; bottom: 16px; transform: translate(-50%, 140%); z-index: 50;
-      width: min(560px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      background: var(--brown); color: #fff; border: none; border-radius: 18px; padding: .8rem .8rem .8rem 1.2rem;
-      box-shadow: 0 12px 30px rgba(59,31,18,.35); transition: transform .3s cubic-bezier(.2,.9,.3,1.2); text-align: left; }
-    .cart-bar.show { transform: translate(-50%, 0); }
-    .cart-bar small { display: block; opacity: .75; font-size: .8rem; }
-    .cart-bar strong { font-size: 1.05rem; }
-    .cart-bar .go { background: var(--terracotta); padding: .65rem 1.1rem; border-radius: 12px; font-weight: 600; white-space: nowrap; }
-    .wa-float { position: fixed; right: 16px; bottom: 16px; z-index: 45; width: 56px; height: 56px; border-radius: 50%;
-      background: #25d366; color: #fff; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(0,0,0,.25); transition: opacity .2s; }
-    .wa-float svg { width: 28px; height: 28px; }
-    body.has-cart .wa-float { opacity: 0; pointer-events: none; }
+    footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 1rem 1rem 2rem; }
+
+    /* ---------- Bottom dock: Menu / Map / Call / WhatsApp ---------- */
+    .dock { position: fixed; z-index: 50; left: 50%; transform: translateX(-50%); bottom: 16px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 6px;
+      background: rgba(43,22,12,.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-radius: 22px; box-shadow: 0 14px 34px rgba(43,22,12,.35); width: min(440px, calc(100% - 24px)); height: var(--dock-h); }
+    .dock a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 16px;
+      color: rgba(255,255,255,.85); text-decoration: none; font-size: .72rem; font-weight: 600; letter-spacing: .02em; transition: background .2s; }
+    .dock a:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .dock svg { width: 22px; height: 22px; }
+    .dock a.wa { background: var(--wa); color: #06311a; }
+    @media (max-width: 560px) {
+      .dock { left: 0; transform: none; bottom: 0; width: 100%; border-radius: 20px 20px 0 0;
+        height: calc(var(--dock-h) + env(safe-area-inset-bottom)); padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
+    }
+
+    /* ---------- Cart bar (sits above the dock) ---------- */
+    .cart-bar { position: fixed; z-index: 49; left: 50%; bottom: calc(16px + var(--dock-h) + 10px);
+      transform: translate(-50%, 30px); opacity: 0; pointer-events: none;
+      width: min(440px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      background: var(--terracotta); color: #fff; border: none; border-radius: 18px; padding: .7rem .7rem .7rem 1.2rem;
+      box-shadow: 0 12px 30px rgba(201,95,52,.4); transition: transform .3s, opacity .3s; text-align: left; }
+    .cart-bar.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+    .cart-bar small { display: block; opacity: .85; font-size: .8rem; }
+    .cart-bar strong { font-size: 1.1rem; }
+    .cart-bar .go { background: rgba(0,0,0,.18); padding: .6rem 1rem; border-radius: 12px; font-weight: 600; white-space: nowrap; }
+    @media (max-width: 560px) { .cart-bar { bottom: calc(var(--dock-h) + env(safe-area-inset-bottom) + 10px); } }
 
     /* ---------- Cart dialog ---------- */
     dialog#cart { border: none; padding: 0; background: var(--bg); color: var(--text);
-      width: 100%; max-width: 100%; max-height: 88vh; margin: auto auto 0; border-radius: 22px 22px 0 0; }
-    dialog#cart::backdrop { background: rgba(36,21,13,.5); }
+      width: 100%; max-width: 100%; max-height: 85vh; margin: auto auto 0; border-radius: 22px 22px 0 0; }
+    dialog#cart::backdrop { background: rgba(35,20,12,.5); }
     @media (min-width: 768px) {
-      dialog#cart { width: 420px; height: 100vh; max-height: 100vh; margin: 0 0 0 auto; border-radius: 22px 0 0 22px; }
+      dialog#cart { width: 430px; height: 100vh; max-height: 100vh; margin: 0 0 0 auto; border-radius: 22px 0 0 22px; }
     }
     .cart-inner { display: flex; flex-direction: column; height: 100%; max-height: inherit; }
-    .cart-head { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.3rem; border-bottom: 1px solid var(--line); }
-    .cart-head h2 { font-family: var(--font-display); font-size: 1.5rem; }
-    .close { background: var(--cream); border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.2rem; }
-    .cart-lines { overflow-y: auto; padding: .4rem 1.3rem; flex: 1; }
-    .line { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding: .85rem 0; border-bottom: 1px solid var(--line); }
+    .cart-head { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--line); }
+    .cart-head h2 { font-family: var(--font-display); font-size: 1.5rem; color: var(--brown); }
+    .close { background: var(--cream); border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.1rem; }
+    .cart-lines { overflow-y: auto; padding: .3rem 1.4rem; flex: 1; }
+    .line { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding: .9rem 0; border-bottom: 1px solid var(--line); }
     .line-name { font-weight: 600; }
     .line-meta { color: var(--muted); font-size: .85rem; }
-    .cart-foot { padding: 1rem 1.3rem 1.3rem; border-top: 1px solid var(--line); background: var(--surface); }
-    .sum { display: flex; justify-content: space-between; color: var(--muted); font-size: .95rem; margin: .2rem 0; }
-    .sum.total { color: var(--text); font-weight: 700; font-size: 1.15rem; margin: .5rem 0 1rem; }
-    .cart-foot .btn { width: 100%; }
+    .cart-foot { padding: 1.1rem 1.4rem calc(1.3rem + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--surface); }
+    .sum { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; }
+    .send { width: 100%; background: var(--wa); color: #06311a; }
     .clear { background: none; border: none; color: var(--muted); text-decoration: underline; margin-top: .7rem; width: 100%; font-size: .9rem; }
     .empty { text-align: center; color: var(--muted); padding: 3rem 1rem; }
 
@@ -181,93 +231,125 @@
 
   <header>
     <div class="container nav">
-      <a href="#top" class="logo"><span class="logo-mark">م</span><span class="full">Al Arabian Mandi</span></a>
+      <a href="#top" class="logo"><span class="logo-mark">م</span><span>Al Arabian Mandi</span></a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="#story">Story</a></li>
+        <li><a href="#deals">Deals</a></li>
         <li><a href="#menu">Menu</a></li>
         <li><a href="#visit">Visit</a></li>
       </ul>
-      <a class="btn btn-primary" href="#menu">Order now</a>
+      <a class="btn btn-primary" href="#deals">Order now</a>
     </div>
   </header>
 
   <main id="top">
-    <!-- ---------- Hero (bento) ---------- -->
-    <section class="hero container">
-      <div class="bento">
-        <div class="tile tile-dark hero-main span-3 row-2">
-          <div>
-            <span class="label">Haripur · Arabian &amp; Pashtun heritage</span>
-            <h1>Al Arabian Mandi<br>&amp; Shinwari House</h1>
-            <div class="arabic" lang="ar" dir="rtl">مندى العربى</div>
-            <p>Arabic Mandi and Shinwari cuisine, brought to Haripur for the first time.</p>
-          </div>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#menu">Browse menu &amp; order</a>
-            <a class="btn btn-light" href="tel:+923369957193">Call 0336 9957193</a>
-          </div>
+    <!-- ---------- Hero ---------- -->
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Haripur · Arabian &amp; Pashtun heritage</span>
+        <h1>Al Arabian Mandi<br>&amp; Shinwari House</h1>
+        <div class="arabic" lang="ar" dir="rtl">مندى العربى</div>
+        <p class="lead">Slow-cooked Arabic Mandi, Shinwari karahi and smoky BBQ, rooted in Arabian and Pashtun heritage.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#deals">Order now</a>
+          <a class="btn btn-outline" href="#menu">See full menu</a>
         </div>
-        <div class="tile tile-terra">
-          <span class="label">Open every day</span>
-          <div class="big">12 PM – 12 AM</div>
-          <span>Dine in · Take away</span>
-        </div>
-        <div class="tile tile-cream">
-          <span class="label">On Google</span>
-          <div class="big">4.7 <span class="stars">★★★★★</span></div>
-          <span class="item-desc">Family restaurant</span>
+        <div class="stats">
+          <div class="stat"><b>Open daily</b><span>12 PM – 12 AM</span></div>
+          <div class="stat"><b>4.7 <span class="stars">★</span></b><span>Rated on Google</span></div>
+          <div class="stat"><b>Dine in</b><span>&amp; take away</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ---------- About ---------- -->
-    <section id="about" class="container about">
-      <h2 class="title">Our story</h2>
-      <p class="sub">Arabian and Pashtun heritage on one table.</p>
-      <p>Welcome to Al-Arabian Mandi &amp; Shinwari House! Founded by two brothers with a passion for authentic flavors, we are proud to bring the rich tradition of Arabic Mandi and Shinwari cuisine to Haripur for the first time.</p>
-      <p>Our dishes are crafted with the finest ingredients, slow-cooked to perfection, and infused with the essence of Arabian and Pashtun heritage. Whether you're craving the aromatic flavors of Mandi or the bold taste of Shinwari, we promise an unforgettable dining experience that stays true to its roots. Join us and savor the taste of authenticity!</p>
+    <!-- ---------- Story ---------- -->
+    <section id="story">
+      <div class="container story">
+        <div>
+          <div class="head">
+            <span class="eyebrow">Our story</span>
+            <h2>Two brothers, one passion for authentic flavor</h2>
+            <hr class="divider">
+          </div>
+          <p>Welcome to Al-Arabian Mandi &amp; Shinwari House! Founded by two brothers with a passion for authentic flavors, we are proud to bring the rich tradition of Arabic Mandi and Shinwari cuisine to Haripur for the first time.</p>
+          <p>Our dishes are crafted with the finest ingredients, slow-cooked to perfection, and infused with the essence of Arabian and Pashtun heritage. Join us and savor the taste of authenticity!</p>
+        </div>
+        <div class="highlights">
+          <div class="hl"><span class="ico" aria-hidden="true">🍖</span><b>Arabic Mandi</b><span>Slow-cooked mutton on fragrant rice</span></div>
+          <div class="hl"><span class="ico" aria-hidden="true">🥘</span><b>Shinwari Karahi</b><span>Bold Pashtun classic</span></div>
+          <div class="hl"><span class="ico" aria-hidden="true">🔥</span><b>Arabic BBQ</b><span>Platters, boti &amp; kababs</span></div>
+          <div class="hl"><span class="ico" aria-hidden="true">👨‍👩‍👧</span><b>Family dining</b><span>A family restaurant</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Deals ---------- -->
+    <section id="deals" class="deals-wrap">
+      <div class="container">
+        <div class="head">
+          <span class="eyebrow">Amazing deals</span>
+          <h2>Tap a deal to add it</h2>
+          <p>Complete meals at one price. Tap again to add more.</p>
+        </div>
+        <div class="deals" id="deals-list"></div>
+      </div>
     </section>
 
     <!-- ---------- Menu ---------- -->
     <section id="menu">
-      <div class="container">
-        <h2 class="title">Menu</h2>
-        <p class="sub">Tap <b>Add</b>, set the quantity, then send your order on WhatsApp.</p>
+      <div class="container head" style="margin-bottom:1.5rem">
+        <span class="eyebrow">Full menu</span>
+        <h2>Mandi, karahi &amp; BBQ</h2>
+        <p>Tap <b>Add</b>, set the quantity, then send your order on WhatsApp.</p>
       </div>
       <nav class="catbar" aria-label="Menu categories"><div class="container cats" id="cats"></div></nav>
       <div class="container" id="menu-list"></div>
-      <p class="container tax-note">All prices in PKR and subject to 10% KPRA sales tax.</p>
     </section>
 
-    <!-- ---------- Visit (bento) ---------- -->
-    <section id="visit" class="container">
-      <h2 class="title">Visit us</h2>
-      <p class="sub">Near CNG Adda, Tableeghi Markaz Road, Haripur</p>
-      <div class="bento">
-        <div class="tile map-tile span-2 row-2">
-          <iframe title="Map: Al Arabian Mandi & Shinwari House, Haripur" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://maps.google.com/maps?q=33.993391,72.9278215&z=16&output=embed"></iframe>
+    <!-- ---------- Visit ---------- -->
+    <section id="visit">
+      <div class="container">
+        <div class="head">
+          <span class="eyebrow">Visit us</span>
+          <h2>Find us in Haripur</h2>
+          <hr class="divider">
         </div>
-        <div class="tile tile-dark span-2">
-          <span class="label">Address</span>
-          <div class="big">Near CNG Adda</div>
-          <p style="opacity:.8;margin-bottom:1rem">Tableeghi Markaz Road, Haripur, Pakistan</p>
-          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=33.993391,72.9278215" target="_blank" rel="noopener">Get directions</a>
-        </div>
-        <div class="tile">
-          <span class="label">Contact</span>
-          <ul class="contact-list">
-            <li>WhatsApp <a href="https://wa.me/923369957193" target="_blank" rel="noopener">0336 9957193</a></li>
-            <li>Phone <a href="tel:+92995309328">0995 309328</a></li>
-          </ul>
-        </div>
-        <div class="tile tile-cream">
-          <span class="label">Follow</span>
-          <ul class="contact-list">
-            <li><a href="https://www.instagram.com/al_arabianmandi/" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://www.tiktok.com/@alarabianmandi" target="_blank" rel="noopener">TikTok</a></li>
-            <li class="item-desc">Facebook: Al-Arabian Mandi &amp; Shinwari House</li>
-          </ul>
+        <div class="visit">
+          <div class="map">
+            <iframe title="Map: Al Arabian Mandi & Shinwari House, Haripur" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=33.993391,72.9278215&z=16&output=embed"></iframe>
+          </div>
+          <div class="info">
+            <div>
+              <h4>Address</h4>
+              <p>Near CNG Adda, Tableeghi Markaz Road,<br>Haripur, Pakistan</p>
+            </div>
+            <div class="info-grid">
+              <div>
+                <h4>Hours</h4>
+                <p>Every day<br>12 PM – 12 AM</p>
+              </div>
+              <div>
+                <h4>Contact</h4>
+                <ul>
+                  <li><a href="https://wa.me/923369957193" target="_blank" rel="noopener">0336 9957193</a></li>
+                  <li><a href="tel:+92995309328">0995 309328</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4>Follow</h4>
+                <ul>
+                  <li><a href="https://www.instagram.com/al_arabianmandi/" target="_blank" rel="noopener">Instagram</a></li>
+                  <li><a href="https://www.tiktok.com/@alarabianmandi" target="_blank" rel="noopener">TikTok</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4>Facebook</h4>
+                <p>Al-Arabian Mandi &amp; Shinwari House</p>
+              </div>
+            </div>
+            <div><a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination=33.993391,72.9278215" target="_blank" rel="noopener">Get directions</a></div>
+          </div>
         </div>
       </div>
     </section>
@@ -275,16 +357,33 @@
 
   <footer>© Al Arabian Mandi &amp; Shinwari House, Haripur</footer>
 
-  <!-- ---------- Cart ---------- -->
+  <!-- ---------- Cart bar ---------- -->
   <button class="cart-bar" id="cart-bar" type="button" aria-label="View order">
     <span><small id="cart-count">0 items</small><strong id="cart-total">Rs 0</strong></span>
     <span class="go">View order →</span>
   </button>
 
-  <a class="wa-float" href="https://wa.me/923369957193" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.770-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.94.95-3.48-.22-.36a9.43 9.43 0 1 1 7.99 4.410zm8.02-17.46A11.27 11.27 0 0 0 12.05.72C5.8.72.72 5.8.72 12.05c0 2 .52 3.95 1.52 5.66L.62 23.5l5.930-1.56a11.3 11.3 0 0 0 5.5 1.4h.01c6.24 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.87-3.32-8z"/></svg>
-  </a>
+  <!-- ---------- Bottom dock ---------- -->
+  <nav class="dock" aria-label="Quick actions">
+    <a href="#menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M9 7h7M9 11h5"/></svg>
+      Menu
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=33.993391,72.9278215" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      Map
+    </a>
+    <a href="tel:+923369957193">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+      Call
+    </a>
+    <a class="wa" href="https://wa.me/923369957193" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.94.95-3.48-.22-.36a9.43 9.43 0 1 1 7.99 4.41zm8.02-17.46A11.27 11.27 0 0 0 12.05.72C5.8.72.72 5.8.72 12.05c0 2 .52 3.95 1.52 5.66L.62 23.5l5.93-1.56a11.3 11.3 0 0 0 5.5 1.4h.01c6.24 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.87-3.32-8z"/></svg>
+      WhatsApp
+    </a>
+  </nav>
 
+  <!-- ---------- Cart dialog ---------- -->
   <dialog id="cart" aria-labelledby="cart-title">
     <div class="cart-inner">
       <div class="cart-head">
@@ -293,10 +392,8 @@
       </div>
       <div class="cart-lines" id="cart-lines"></div>
       <div class="cart-foot">
-        <div class="sum"><span>Subtotal</span><span id="sum-sub">Rs 0</span></div>
-        <div class="sum"><span>KPRA sales tax (10%)</span><span id="sum-tax">Rs 0</span></div>
-        <div class="sum total"><span>Total</span><span id="sum-total">Rs 0</span></div>
-        <a class="btn btn-green" id="send" target="_blank" rel="noopener" href="#">Send order on WhatsApp</a>
+        <div class="sum"><span>Total</span><span id="sum-total">Rs 0</span></div>
+        <a class="btn send" id="send" target="_blank" rel="noopener" href="#">Send order on WhatsApp</a>
         <button class="clear" type="button" id="clear">Clear order</button>
       </div>
     </div>
@@ -304,7 +401,8 @@
 
   <script>
     // Menu transcribed from the restaurant's printed menu. Edit prices here.
-    // Each item: name, desc, tag, opts: [[optionLabel, price]]. No opts = price on request.
+    // Each item: name, desc, tag, opts: [[optionLabel, price]]. Empty opts = price on request.
+    // MENU[0] is Deals (shown as tappable cards); the rest are shown in the menu list.
     const WA = "923369957193";
     const MENU = [
       { cat: "Deals", items: [
@@ -330,10 +428,10 @@
         { name: "Chicken White Karahi", opts: [["Half", 999], ["Full", 1999]] },
         { name: "Chicken Lahori Karahi", opts: [["Half", 999], ["Full", 1999]] },
         { name: "Chicken Shinwari Karahi", opts: [["Half", 999], ["Full", 1999]] },
+        { name: "Seekh Kabab Karahi", opts: [["Half", 1100], ["Full", 2200]] },
         { name: "Shinwari Mutton Karahi", opts: [["1 KG", 3700]] },
         { name: "Lahori Mutton Karahi", opts: [["1 KG", 3700]] },
         { name: "Sulemani Mutton Karahi", opts: [["1 KG", 3700]] },
-        { name: "Seekh Kabab Karahi", opts: [["Half", 1100], ["Full", 2200]] },
       ]},
       { cat: "Handi", items: [
         { name: "Lahori Chili Handi", opts: [["Half", 1100], ["Full", 2200]] },
@@ -345,9 +443,9 @@
         { name: "Spicy / Malai Boti", opts: [["6 pcs", 600], ["12 pcs", 1200]] },
         { name: "Behari Boti", opts: [["6 pcs", 600], ["12 pcs", 1200]] },
         { name: "Seekh / Reshmi Kabab", opts: [["3 pcs", 700], ["6 pcs", 1400]] },
-        { name: "Chest / Leg Piece", opts: [["1 piece", 400]] },
-        { name: "Batair BBQ", desc: "12 pieces · price on request", opts: [] },
         { name: "Pulao", opts: [["Simple", 350], ["Chicken", 750], ["Beef", 600]] },
+        { name: "Chest / Leg Piece", opts: [["Per piece", 400]] },
+        { name: "Batair BBQ", desc: "12 pieces · price on request", opts: [] },
       ]},
       { cat: "Sides & Drinks", items: [
         { name: "Naan", opts: [["", 40]] },
@@ -376,59 +474,69 @@
     function control(key) {
       const q = cart.get(key) || 0;
       return q === 0
-        ? `<button class="add" data-key="${key}" data-d="1" aria-label="Add">Add +</button>`
+        ? `<button class="add" data-key="${key}" data-d="1">Add +</button>`
         : `<span class="stepper"><button data-key="${key}" data-d="-1" aria-label="Decrease">−</button>
            <output aria-live="polite">${q}</output><button data-key="${key}" data-d="1" aria-label="Increase">+</button></span>`;
     }
 
-    function renderMenu() {
-      $("#cats").innerHTML = MENU.map(m => `<a href="#c-${slug(m.cat)}">${esc(m.cat)}</a>`).join("");
-      $("#menu-list").innerHTML = MENU.map((m, c) => `
-        <div class="menu-cat" id="c-${slug(m.cat)}">
-          <h3>${esc(m.cat)}</h3>${m.note ? `<p class="note">${esc(m.note)}</p>` : `<p class="note"></p>`}
-          <div class="items">${m.items.map((it, i) => `
-            <article class="item" data-item="${c}-${i}">
-              <div class="item-name">${esc(it.name)}${it.tag ? `<span class="tag">${esc(it.tag)}</span>` : ""}</div>
-              ${it.desc ? `<p class="item-desc">${esc(it.desc)}</p>` : ""}
-              <div class="opts">${it.opts.length ? it.opts.map(([label, price], o) => `
-                <div class="opt"><div class="opt-info">${label ? `<span>${esc(label)}</span>` : ""}<b>${rs(price)}</b></div>
-                  <div class="ctl" id="ctl-${c}-${i}-${o}">${control(`${c}-${i}-${o}`)}</div></div>`).join("")
-                : `<a class="ask" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent("Assalam o Alaikum! What is the price of " + it.name + "?")}">Ask price on WhatsApp →</a>`}
-              </div>
-            </article>`).join("")}</div>
-        </div>`).join("");
+    function dealFoot(key) {
+      return (cart.get(key) || 0) === 0
+        ? `<span class="deal-hint">Tap to add</span><span class="add" style="display:grid;place-items:center">Add +</span>`
+        : `<span class="deal-hint">Added to order</span>${control(key)}`;
     }
 
-    function totals() {
-      let count = 0, sub = 0;
-      cart.forEach((q, k) => { count += q; sub += q * lookup(k).price; });
-      const tax = Math.round(sub * 0.10);
-      return { count, sub, tax, total: sub + tax };
+    function render() {
+      $("#deals-list").innerHTML = MENU[0].items.map((d, i) => `
+        <article class="deal" role="button" tabindex="0" data-tap="0-${i}-0" data-item="0-${i}" aria-label="Add ${esc(d.name)}, ${rs(d.opts[0][1])}">
+          <div class="deal-top"><span class="deal-name">${esc(d.name)}</span><span class="deal-price">${rs(d.opts[0][1])}</span></div>
+          <p class="deal-desc">${esc(d.desc)}</p>
+          <div class="deal-foot" id="foot-0-${i}-0">${dealFoot(`0-${i}-0`)}</div>
+        </article>`).join("");
+
+      const cats = MENU.slice(1);
+      $("#cats").innerHTML = cats.map(m => `<a href="#c-${slug(m.cat)}">${esc(m.cat)}</a>`).join("");
+      $("#menu-list").innerHTML = cats.map((m, ci) => { const c = ci + 1; return `
+        <div class="menu-cat" id="c-${slug(m.cat)}">
+          <div class="cat-head"><h3>${esc(m.cat)}</h3>${m.note ? `<p>${esc(m.note)}</p>` : ""}</div>
+          <div class="dishes">${m.items.map((it, i) => `
+            <article class="dish" data-item="${c}-${i}">
+              <div>
+                <div class="dish-name">${esc(it.name)}${it.tag ? `<span class="tag">${esc(it.tag)}</span>` : ""}</div>
+                ${it.desc ? `<p class="dish-desc">${esc(it.desc)}</p>` : ""}
+              </div>
+              <div class="opts">${it.opts.length ? it.opts.map(([label, price], o) => `
+                <div class="opt"><div class="opt-info">${label ? `<span>${esc(label)}</span>` : ""}<b>${rs(price)}</b></div>
+                  <div id="ctl-${c}-${i}-${o}">${control(`${c}-${i}-${o}`)}</div></div>`).join("")
+                : `<a class="ask" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent("Assalam o Alaikum! What is the price of " + it.name + "?")}">Ask price →</a>`}
+              </div>
+            </article>`).join("")}</div>
+        </div>`; }).join("");
+    }
+
+    function total() {
+      let count = 0, sum = 0;
+      cart.forEach((q, k) => { count += q; sum += q * lookup(k).price; });
+      return { count, sum };
     }
 
     function waMessage() {
-      const t = totals();
       const lines = [...cart].map(([k, q]) => { const { name, price } = lookup(k); return `${q} × ${name} = ${rs(q * price)}`; });
-      return ["Assalam o Alaikum! I would like to order:", "", ...lines, "",
-        `Subtotal: ${rs(t.sub)}`, `KPRA tax (10%): ${rs(t.tax)}`, `Total: ${rs(t.total)}`].join("\n");
+      return ["Assalam o Alaikum! I would like to order:", "", ...lines, "", `Total: ${rs(total().sum)}`].join("\n");
     }
 
     function renderCart() {
-      const t = totals();
-      document.body.classList.toggle("has-cart", t.count > 0);
+      const t = total();
       $("#cart-bar").classList.toggle("show", t.count > 0);
-      $("#cart-count").textContent = `${t.count} item${t.count === 1 ? "" : "s"} · incl. tax`;
-      $("#cart-total").textContent = rs(t.total);
-      $("#sum-sub").textContent = rs(t.sub);
-      $("#sum-tax").textContent = rs(t.tax);
-      $("#sum-total").textContent = rs(t.total);
+      $("#cart-count").textContent = `${t.count} item${t.count === 1 ? "" : "s"} in your order`;
+      $("#cart-total").textContent = rs(t.sum);
+      $("#sum-total").textContent = rs(t.sum);
       $("#send").href = `https://wa.me/${WA}?text=${encodeURIComponent(waMessage())}`;
       $("#cart-lines").innerHTML = cart.size ? [...cart].map(([k, q]) => {
         const { name, price } = lookup(k);
         return `<div class="line"><div><div class="line-name">${esc(name)}</div><div class="line-meta">${rs(price)} each · ${rs(price * q)}</div></div>
-          <div class="ctl" data-cart-ctl="${k}">${control(k)}</div></div>`;
-      }).join("") : `<p class="empty">Your order is empty.<br>Tap “Add” on any dish.</p>`;
-      document.querySelectorAll(".item").forEach(el => {
+          <div data-cart-ctl="${k}">${control(k)}</div></div>`;
+      }).join("") : `<p class="empty">Your order is empty.<br>Tap a deal or “Add” on any dish.</p>`;
+      document.querySelectorAll("[data-item]").forEach(el => {
         const prefix = el.dataset.item + "-";
         el.classList.toggle("in-cart", [...cart.keys()].some(k => k.startsWith(prefix)));
       });
@@ -439,18 +547,26 @@
       if (q <= 0) cart.delete(key); else cart.set(key, q);
       const ctl = document.getElementById("ctl-" + key);
       if (ctl) ctl.innerHTML = control(key);
+      const foot = document.getElementById("foot-" + key);
+      if (foot) foot.innerHTML = dealFoot(key);
       renderCart();
     }
 
     document.addEventListener("click", e => {
       const b = e.target.closest("button[data-key]");
-      if (b) change(b.dataset.key, Number(b.dataset.d));
+      if (b) return change(b.dataset.key, Number(b.dataset.d));
+      const deal = e.target.closest("[data-tap]");   // tap anywhere on a deal card
+      if (deal) change(deal.dataset.tap, 1);
+    });
+    document.addEventListener("keydown", e => {
+      const deal = e.target.closest && e.target.closest("[data-tap]");
+      if (deal && e.target === deal && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); change(deal.dataset.tap, 1); }
     });
     $("#cart-bar").addEventListener("click", () => $("#cart").showModal());
     $("#cart-close").addEventListener("click", () => $("#cart").close());
     $("#cart").addEventListener("click", e => { if (e.target.id === "cart") $("#cart").close(); });
     $("#clear").addEventListener("click", () => {
-      [...cart.keys()].forEach(k => { cart.delete(k); const c = document.getElementById("ctl-" + k); if (c) c.innerHTML = control(k); });
+      [...cart.keys()].forEach(k => { cart.delete(k); change(k, 0); });
       renderCart();
     });
 
@@ -464,7 +580,7 @@
       });
     }), { rootMargin: "-150px 0px -60% 0px" });
 
-    renderMenu();
+    render();
     renderCart();
     document.querySelectorAll(".menu-cat").forEach(s => io.observe(s));
   </script>
