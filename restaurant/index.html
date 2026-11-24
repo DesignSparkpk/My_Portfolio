@@ -226,16 +226,83 @@
     .clear { background: none; border: none; color: var(--muted); text-decoration: underline; margin-top: .7rem; width: 100%; font-size: .9rem; }
     .empty { text-align: center; color: var(--muted); padding: 3rem 1rem; }
 
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+    /* ---------- Top-tier polish ---------- */
+    /* Header: transparent over the hero, solid once scrolled */
+    header { transition: background .3s, border-color .3s; }
+    header.on-hero { background: transparent; border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+    header.on-hero .logo, header.on-hero .nav-links a { color: #fff; }
+    header.on-hero .logo-mark { background: var(--gold); color: var(--brown); }
+    /* Full-screen hero (photo-ready) */
+    .hero { margin-top: -66px; min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+      padding-top: calc(66px + 2rem); padding-bottom: calc(var(--dock-h) + 28px + env(safe-area-inset-bottom)); }
+    .hero > .container { width: 100%; }
+    .hero.has-photo { background: linear-gradient(180deg, rgba(20,10,5,.55), rgba(20,10,5,.35) 40%, rgba(20,10,5,.85)), var(--hero-img) center / cover no-repeat; }
+    .hero .stats { margin-top: clamp(2.5rem, 8vh, 5rem); }
+    .stat-link { text-decoration: none; transition: background .2s; }
+    .stat-link:hover { background: rgba(255,255,255,.06); }
+    .ornament { display: flex; align-items: center; justify-content: center; gap: .8rem; color: var(--gold); margin: 1.2rem 0 0; }
+    .ornament::before, .ornament::after { content: ""; width: 48px; height: 1px; background: currentColor; opacity: .6; }
+    .hero-in > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-in > *:nth-child(2) { animation-delay: .1s; } .hero-in > *:nth-child(3) { animation-delay: .2s; }
+    .hero-in > *:nth-child(4) { animation-delay: .3s; } .hero-in > *:nth-child(5) { animation-delay: .4s; } .hero-in > *:nth-child(6) { animation-delay: .5s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+    /* Signature dishes */
+    .signature { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 900px) { .signature { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
+    .sig { background: var(--brown); color: #fff; border-radius: var(--radius); overflow: hidden; cursor: pointer; user-select: none;
+      display: flex; flex-direction: column; box-shadow: 0 18px 40px rgba(43,22,12,.18); border: 2px solid transparent; transition: transform .25s, border-color .2s; }
+    .sig:hover { transform: translateY(-4px); }
+    .sig.in-cart { border-color: var(--gold); }
+    .sig-img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; display: block; }
+    .sig-body { padding: 1.7rem; display: flex; flex-direction: column; gap: .5rem; flex: 1;
+      background: radial-gradient(90% 60% at 100% 0%, rgba(214,162,74,.18), transparent 60%); }
+    .sig-num { font-family: var(--font-display); color: var(--gold); font-size: 1rem; letter-spacing: .1em; }
+    .sig-name { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; line-height: 1.15; }
+    .sig-desc { color: rgba(255,255,255,.7); font-size: .92rem; flex: 1; }
+    .sig-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.12); }
+    .sig-price { font-weight: 700; font-size: 1.15rem; color: var(--gold); }
+    .sig .add { background: rgba(255,255,255,.12); color: #fff; display: grid; place-items: center; }
+    .sig .tag { background: rgba(214,162,74,.2); color: var(--gold); margin-left: 0; }
+    /* Gatherings band */
+    .band { background: var(--terracotta); color: #fff; padding: 4rem 0; }
+    .band .container { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: center; }
+    .band .eyebrow { color: #ffe2c9; }
+    .band h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; margin: .4rem 0 .6rem; }
+    .band p { color: rgba(255,255,255,.85); max-width: 52ch; }
+    .band-actions { display: flex; flex-direction: column; gap: .7rem; align-items: flex-end; }
+    .band-actions small { color: rgba(255,255,255,.8); }
+    .btn-white { background: #fff; color: var(--brown); }
+    @media (max-width: 760px) { .band .container { grid-template-columns: 1fr; text-align: center; } .band p { margin: 0 auto; } .band-actions { align-items: center; } }
+    /* Footer */
+    footer.site-footer { background: var(--brown); color: rgba(255,255,255,.75); text-align: left; padding: 4rem 0 calc(170px + env(safe-area-inset-bottom)); font-size: .92rem; }
+    body { padding-bottom: 0; }
+    .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2rem; }
+    @media (max-width: 860px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .foot-grid { grid-template-columns: 1fr; text-align: center; } }
+    .foot-brand { font-family: var(--font-display); font-size: 1.5rem; color: #fff; line-height: 1.2; }
+    .site-footer h4 { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; }
+    .site-footer ul { list-style: none; display: grid; gap: .3rem; }
+    .site-footer a { color: #fff; text-decoration: none; }
+    .site-footer a:hover { color: var(--gold); }
+    .foot-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 2.5rem; padding-top: 1.5rem; text-align: center; font-size: .82rem; }
+    /* Scroll reveal (only when JS runs) */
+    .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
 
-  <header>
+  <header class="on-hero">
     <div class="container nav">
       <a href="#top" class="logo"><span class="logo-mark">م</span><span>Al Arabian Mandi</span></a>
       <ul class="nav-links">
         <li><a href="#story">Story</a></li>
+        <li><a href="#signature">Signature</a></li>
         <li><a href="#deals">Deals</a></li>
         <li><a href="#menu">Menu</a></li>
         <li><a href="#visit">Visit</a></li>
@@ -246,11 +313,11 @@
 
   <main id="top">
     <!-- ---------- Hero ---------- -->
-    <section class="hero">
-      <div class="container">
+    <section class="hero" id="hero">
+      <div class="container hero-in">
         <span class="eyebrow">Haripur · Arabian &amp; Pashtun heritage</span>
         <h1>Al Arabian Mandi<br>&amp; Shinwari House</h1>
-        <div class="arabic" lang="ar" dir="rtl">مندى العربى</div>
+        <div class="arabic ornament" lang="ar" dir="rtl">مندى العربى</div>
         <p class="lead">Slow-cooked Arabic Mandi, Shinwari karahi and smoky BBQ, rooted in Arabian and Pashtun heritage.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#deals">Order now</a>
@@ -258,7 +325,7 @@
         </div>
         <div class="stats">
           <div class="stat"><b>Open daily</b><span>12 PM – 12 AM</span></div>
-          <div class="stat"><b>4.7 <span class="stars">★</span></b><span>Rated on Google</span></div>
+          <a class="stat stat-link" href="https://www.google.com/maps?cid=4967932543549289863" target="_blank" rel="noopener"><b>4.7 <span class="stars">★</span></b><span>Google reviews ↗</span></a>
           <div class="stat"><b>Dine in</b><span>&amp; take away</span></div>
         </div>
       </div>
@@ -268,7 +335,7 @@
     <section id="story">
       <div class="container story">
         <div>
-          <div class="head">
+          <div class="head reveal">
             <span class="eyebrow">Our story</span>
             <h2>Two brothers, one passion for authentic flavor</h2>
             <hr class="divider">
@@ -276,7 +343,7 @@
           <p>Welcome to Al-Arabian Mandi &amp; Shinwari House! Founded by two brothers with a passion for authentic flavors, we are proud to bring the rich tradition of Arabic Mandi and Shinwari cuisine to Haripur for the first time.</p>
           <p>Our dishes are crafted with the finest ingredients, slow-cooked to perfection, and infused with the essence of Arabian and Pashtun heritage. Join us and savor the taste of authenticity!</p>
         </div>
-        <div class="highlights">
+        <div class="highlights reveal">
           <div class="hl"><span class="ico" aria-hidden="true">🍖</span><b>Arabic Mandi</b><span>Slow-cooked mutton on fragrant rice</span></div>
           <div class="hl"><span class="ico" aria-hidden="true">🥘</span><b>Shinwari Karahi</b><span>Bold Pashtun classic</span></div>
           <div class="hl"><span class="ico" aria-hidden="true">🔥</span><b>Arabic BBQ</b><span>Platters, boti &amp; kababs</span></div>
@@ -285,10 +352,22 @@
       </div>
     </section>
 
+    <!-- ---------- Signature dishes ---------- -->
+    <section id="signature">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Signature dishes</span>
+          <h2>The house favourites</h2>
+          <p>The dishes that brought Mandi and Shinwari to Haripur. Tap one to add it.</p>
+        </div>
+        <div class="signature" id="sig-list"></div>
+      </div>
+    </section>
+
     <!-- ---------- Deals ---------- -->
     <section id="deals" class="deals-wrap">
       <div class="container">
-        <div class="head">
+        <div class="head reveal">
           <span class="eyebrow">Amazing deals</span>
           <h2>Tap a deal to add it</h2>
           <p>Complete meals at one price. Tap again to add more.</p>
@@ -299,7 +378,7 @@
 
     <!-- ---------- Menu ---------- -->
     <section id="menu">
-      <div class="container head" style="margin-bottom:1.5rem">
+      <div class="container head reveal" style="margin-bottom:1.5rem">
         <span class="eyebrow">Full menu</span>
         <h2>Mandi, karahi &amp; BBQ</h2>
         <p>Tap <b>Add</b>, set the quantity, then send your order on WhatsApp.</p>
@@ -308,15 +387,31 @@
       <div class="container" id="menu-list"></div>
     </section>
 
+    <!-- ---------- Gatherings ---------- -->
+    <section class="band" aria-labelledby="band-title">
+      <div class="container reveal">
+        <div>
+          <span class="eyebrow">Gatherings &amp; dawats</span>
+          <h2 id="band-title">A Full Mandi for 16–18 guests</h2>
+          <p>About 8 KG of slow-cooked meat on rice with tomato sauce, made to order for family dinners and celebrations. Book in advance on WhatsApp.</p>
+        </div>
+        <div class="band-actions">
+          <a class="btn btn-white" target="_blank" rel="noopener"
+             href="https://wa.me/923369957193?text=Assalam%20o%20Alaikum!%20I%20would%20like%20to%20book%20a%20Full%20Mandi%20(16-18%20persons)%20in%20advance.">Book a Full Mandi</a>
+          <small>Rs 34,000 · Mutton Mandi for 2–3 also needs advance booking</small>
+        </div>
+      </div>
+    </section>
+
     <!-- ---------- Visit ---------- -->
     <section id="visit">
       <div class="container">
-        <div class="head">
+        <div class="head reveal">
           <span class="eyebrow">Visit us</span>
           <h2>Find us in Haripur</h2>
           <hr class="divider">
         </div>
-        <div class="visit">
+        <div class="visit reveal">
           <div class="map">
             <iframe title="Map: Al Arabian Mandi & Shinwari House, Haripur" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               src="https://maps.google.com/maps?q=33.993391,72.9278215&z=16&output=embed"></iframe>
@@ -357,7 +452,38 @@
     </section>
   </main>
 
-  <footer>© Al Arabian Mandi &amp; Shinwari House, Haripur</footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-brand">Al Arabian Mandi<br>&amp; Shinwari House</div>
+          <p style="margin-top:.7rem;max-width:32ch">Arabic Mandi and Shinwari cuisine, slow-cooked in Haripur.</p>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>Near CNG Adda,<br>Tableeghi Markaz Road,<br>Haripur</p>
+        </div>
+        <div>
+          <h4>Hours &amp; contact</h4>
+          <ul>
+            <li>Every day, 12 PM – 12 AM</li>
+            <li><a href="https://wa.me/923369957193" target="_blank" rel="noopener">WhatsApp 0336 9957193</a></li>
+            <li><a href="tel:+92995309328">Phone 0995 309328</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#signature">Signature dishes</a></li>
+            <li><a href="#deals">Deals</a></li>
+            <li><a href="#menu">Full menu</a></li>
+            <li><a href="https://www.instagram.com/al_arabianmandi/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@alarabianmandi" target="_blank" rel="noopener">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">© Al Arabian Mandi &amp; Shinwari House, Haripur</div>
+    </div>
+  </footer>
 
   <!-- ---------- Cart bar ---------- -->
   <button class="cart-bar" id="cart-bar" type="button" aria-label="View order">
@@ -402,6 +528,23 @@
   </dialog>
 
   <script>
+    document.documentElement.classList.add("js");
+
+    // PHOTOS: put the restaurant's own photos in an "images" folder next to this file and
+    // write their names here, e.g. hero: "images/hero.jpg". Empty = no photo shown.
+    const PHOTOS = {
+      hero: "",
+      "Mutton Mandi": "",
+      "Shinwari Mutton Karahi": "",
+      "Mandi Platter": "",
+    };
+    // Signature dishes: [dish name in MENU, short description shown on the card]
+    const SIGNATURE = [
+      ["Mutton Mandi", "1 KG slow-cooked mutton on rice with tomato sauce. Serves 2–3."],
+      ["Shinwari Mutton Karahi", "The Pashtun classic: 1 KG mutton karahi, Shinwari style."],
+      ["Mandi Platter", "Mandi mutton, 3 Batair and 2 Turkish kababs with rice, sauce and a 1 litre drink."],
+    ];
+
     // Menu transcribed from the restaurant's printed menu. Edit prices here.
     // Each item: name, desc, tag, opts: [[optionLabel, price]]. Empty opts = price on request.
     // MENU[0] is Deals (shown as tappable cards); the rest are shown in the menu list.
@@ -551,7 +694,31 @@
       if (ctl) ctl.innerHTML = control(key);
       const foot = document.getElementById("foot-" + key);
       if (foot) foot.innerHTML = dealFoot(key);
+      const sig = document.getElementById("sig-" + key);
+      if (sig) sig.innerHTML = sigFoot(key);
       renderCart();
+    }
+
+    const sigFoot = key => dealFoot(key).replace(/<span class="deal-hint">.*?<\/span>/, "");
+
+    function renderSignature() {
+      $("#sig-list").innerHTML = SIGNATURE.map(([name, desc], n) => {
+        let c = -1, i = -1;
+        MENU.forEach((m, ci) => m.items.forEach((it, ii) => { if (it.name === name) { c = ci; i = ii; } }));
+        const it = MENU[c].items[i], key = `${c}-${i}-0`, [label, price] = it.opts[0];
+        const img = PHOTOS[name] ? `<img class="sig-img" src="${esc(PHOTOS[name])}" alt="${esc(name)}" loading="lazy">` : "";
+        return `<article class="sig reveal" role="button" tabindex="0" data-tap="${key}" data-item="${c}-${i}" aria-label="Add ${esc(name)}, ${rs(price)}">
+          ${img}
+          <div class="sig-body">
+            <span class="sig-num">0${n + 1}</span>
+            <div class="sig-name">${esc(name)}</div>
+            ${it.tag ? `<span><span class="tag">${esc(it.tag)}</span></span>` : ""}
+            <p class="sig-desc">${esc(desc)}</p>
+            <div class="sig-foot"><span class="sig-price">${label ? esc(label) + " · " : ""}${rs(price)}</span>
+              <span id="sig-${key}">${sigFoot(key)}</span></div>
+          </div>
+        </article>`;
+      }).join("");
     }
 
     document.addEventListener("click", e => {
@@ -583,8 +750,24 @@
     }), { rootMargin: "-150px 0px -60% 0px" });
 
     render();
+    renderSignature();
     renderCart();
     document.querySelectorAll(".menu-cat").forEach(s => io.observe(s));
+
+    // Hero photo (if set)
+    if (PHOTOS.hero) { const h = $("#hero"); h.classList.add("has-photo"); h.style.setProperty("--hero-img", `url("${PHOTOS.hero}")`); }
+
+    // Header: transparent over the hero, solid after scrolling past it
+    const header = $("header");
+    const onScroll = () => header.classList.toggle("on-hero", scrollY < $("#hero").offsetHeight - 80);
+    addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // Fade sections in as they scroll into view
+    const rev = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add("in"); rev.unobserve(en.target); }
+    }), { rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => rev.observe(el));
   </script>
 </body>
 </html>
