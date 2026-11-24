@@ -608,17 +608,40 @@
     cartChanged(false);
     ids.forEach(refreshCardFor);
     closeCart();
+    undoSnapshot = sent;
+  }
+
+  // Phones often flash this tab back for a moment while WhatsApp is opening, so the Undo toast
+  // stays pending until it has been on screen for its full time; if the page hides first, it shows again on return.
+  let undoSnapshot = null;
+  let undoTimer;
+  function showUndo() {
+    if (!undoSnapshot || document.visibilityState !== 'visible') return;
     toast('Order sent ✓ List cleared', {
       label: 'Undo',
       run: () => {
+        const sent = undoSnapshot;
+        undoSnapshot = null;
+        clearTimeout(undoTimer);
         sent.filter((l) => itemById[l.id]).forEach((l) => cart.set(cartKey(l.id, l.size), { id: l.id, size: l.size || null, qty: l.qty }));
         cartChanged(false);
         sent.forEach((l) => refreshCardFor(l.id));
         toast('Order list restored');
       }
     });
+    clearTimeout(undoTimer);
+    undoTimer = setTimeout(() => { undoSnapshot = null; }, 7000);
   }
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') clearIfOrderSent(); });
+  function onReturn() {
+    if (document.visibilityState !== 'visible') return;
+    clearIfOrderSent();
+    showUndo();
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') onReturn(); else clearTimeout(undoTimer);
+  });
+  window.addEventListener('pageshow', (e) => { if (e.persisted) onReturn(); });   // Back button restoring the page from memory
+  window.addEventListener('focus', onReturn);
 
   /* =====================================================================
      7. Table booking → WhatsApp
@@ -689,5 +712,5 @@
   renderTabs();
   renderMenu();
   updateCartUI(false);
-  clearIfOrderSent();   // the page may have reloaded after WhatsApp opened in this tab
+  onReturn();   // the page may have reloaded after WhatsApp opened in this tab
 })();
