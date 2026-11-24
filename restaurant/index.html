@@ -240,7 +240,20 @@
     .hero { margin-top: -66px; min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
       padding-top: calc(66px + 1rem); padding-bottom: calc(var(--dock-h) + 24px + env(safe-area-inset-bottom)); }
     .hero > .container { width: 100%; }
-    .hero.has-photo { background: linear-gradient(180deg, rgba(20,10,5,.55), rgba(20,10,5,.35) 40%, rgba(20,10,5,.85)), var(--hero-img) center / cover no-repeat; }
+    .hero { position: relative; isolation: isolate; overflow: hidden; }
+    .hero-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(180deg, rgba(20,10,5,.7) 0%, rgba(20,10,5,.45) 35%, rgba(20,10,5,.6) 65%, rgba(20,10,5,.92) 100%); }
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 240px; gap: 14px; }
+    .gallery figure { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); margin: 0; }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+    .gallery figure:hover img { transform: scale(1.05); }
+    .gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 2.2rem 1.1rem .9rem; color: #fff; font-weight: 600; font-size: .92rem;
+      background: linear-gradient(transparent, rgba(20,10,5,.8)); }
+    .g-wide { grid-column: span 2; } .g-tall { grid-row: span 2; }
+    @media (max-width: 760px) { .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 170px; } .g-tall { grid-row: auto; } }
+    @media (max-width: 420px) { .gallery { grid-auto-rows: 140px; } }
     .hero .stats { margin-top: clamp(1.8rem, 5vh, 3.5rem); }
     .stat-link { text-decoration: none; transition: background .2s; }
     .stat-link:hover { background: rgba(255,255,255,.06); }
@@ -309,6 +322,7 @@
         <li><a href="#signature">Signature</a></li>
         <li><a href="#deals">Deals</a></li>
         <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
         <li><a href="#visit">Visit</a></li>
       </ul>
       <a class="btn btn-primary" href="#deals">Order now</a>
@@ -318,6 +332,9 @@
   <main id="top">
     <!-- ---------- Hero ---------- -->
     <section class="hero" id="hero">
+      <video class="hero-media" id="hero-video" autoplay muted loop playsinline preload="auto" poster="images/hero-poster.jpg" aria-hidden="true">
+        <source src="images/hero.mp4" type="video/mp4">
+      </video>
       <div class="container hero-in">
         <img class="hero-logo" src="images/logo.png" alt="Al Arabian Mandi and Shinwari House logo" width="132" height="132">
         <span class="eyebrow">Haripur · Arabian &amp; Pashtun heritage</span>
@@ -390,6 +407,25 @@
       </div>
       <nav class="catbar" aria-label="Menu categories"><div class="container cats" id="cats"></div></nav>
       <div class="container" id="menu-list"></div>
+    </section>
+
+    <!-- ---------- Gallery ---------- -->
+    <section id="gallery">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Inside Al Arabian</span>
+          <h2>Fire, flavour and a rooftop under the lights</h2>
+          <hr class="divider">
+        </div>
+        <div class="gallery reveal">
+          <figure class="g-wide g-tall"><img src="images/gal-hall.jpg" alt="Indoor dining hall with patterned ceiling" loading="lazy"><figcaption>The dining hall</figcaption></figure>
+          <figure><img src="images/gal-flame.jpg" alt="Karahi cooking over a high flame" loading="lazy"><figcaption>Cooked over open flame</figcaption></figure>
+          <figure><img src="images/gal-grill.jpg" alt="Chicken boti on skewers over charcoal" loading="lazy"><figcaption>Charcoal BBQ</figcaption></figure>
+          <figure class="g-wide"><img src="images/gal-rooftop.jpg" alt="Rooftop seating on green turf under string lights" loading="lazy"><figcaption>Rooftop under the lights</figcaption></figure>
+          <figure><img src="images/gal-table.jpg" alt="Kabab platter with salad and a cold drink" loading="lazy"><figcaption>Served hot to your table</figcaption></figure>
+          <figure class="g-wide"><img src="images/gal-facade.jpg" alt="Restaurant storefront lit up at night" loading="lazy"><figcaption>Near CNG Adda, Tableeghi Markaz Road</figcaption></figure>
+        </div>
+      </div>
     </section>
 
     <!-- ---------- Gatherings ---------- -->
@@ -536,19 +572,18 @@
   <script>
     document.documentElement.classList.add("js");
 
-    // PHOTOS: put the restaurant's own photos in an "images" folder next to this file and
-    // write their names here, e.g. hero: "images/hero.jpg". Empty = no photo shown.
+    // PHOTOS: signature-card photos (from the restaurant's own videos), keyed by dish name.
+    // Empty or missing = card shows without a photo.
     const PHOTOS = {
-      hero: "",
-      "Mutton Mandi": "",
-      "Shinwari Mutton Karahi": "",
-      "Mandi Platter": "",
+      "Mutton Mandi": "images/dish-mutton-mandi.jpg",
+      "Shinwari Mutton Karahi": "images/dish-mutton-karahi.jpg",
+      "Half Platter": "images/dish-platter.jpg",
     };
     // Signature dishes: [dish name in MENU, short description shown on the card]
     const SIGNATURE = [
       ["Mutton Mandi", "1 KG slow-cooked mutton on rice with tomato sauce. Serves 2–3."],
       ["Shinwari Mutton Karahi", "The Pashtun classic: 1 KG mutton karahi, Shinwari style."],
-      ["Mandi Platter", "Mandi mutton, 3 Batair and 2 Turkish kababs with rice, sauce and a 1 litre drink."],
+      ["Half Platter", "Seekh and Reshmi kabab, Malai, Spicy and Behari boti, Kalmi tikka, mint sauce and rice."],
     ];
 
     // Menu transcribed from the restaurant's printed menu. Edit prices here.
@@ -761,7 +796,11 @@
     document.querySelectorAll(".menu-cat").forEach(s => io.observe(s));
 
     // Hero photo (if set)
-    if (PHOTOS.hero) { const h = $("#hero"); h.classList.add("has-photo"); h.style.setProperty("--hero-img", `url("${PHOTOS.hero}")`); }
+    // Hero video: show only the poster for reduced-motion or data-saver visitors
+    const vid = $("#hero-video");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || (navigator.connection && navigator.connection.saveData)) {
+      vid.removeAttribute("autoplay"); vid.preload = "none"; vid.pause();
+    }
 
     // Header: transparent over the hero, solid after scrolling past it
     const header = $("header");
