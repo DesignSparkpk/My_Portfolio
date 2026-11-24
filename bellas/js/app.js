@@ -519,6 +519,28 @@
     }
     const grand = $('[data-cart-grand]');
     if (grand) grand.textContent = money(sub + (fee || 0));
+    renderPayment(sub + (fee || 0));
+  }
+
+  /* Payment: cash, or a mobile wallet from B.payments whose details show when it is chosen. */
+  const paymentField = $('[data-payment-field]');
+  const paymentDetails = $('[data-payment-details]');
+  const wallets = B.payments || [];
+  if (paymentField) {
+    $('[data-payment-options]', paymentField).innerHTML = [{ id: 'cash', name: 'Cash' }].concat(wallets).map((p, i) =>
+      `<input type="radio" name="payment" id="pay-${esc(p.id)}" value="${esc(p.id)}"${i ? '' : ' checked'}><label for="pay-${esc(p.id)}">${esc(p.name)}</label>`).join('');
+  }
+  const chosenWallet = () => wallets.find((w) => w.id === new FormData(orderForm).get('payment')) || null;
+  function renderPayment(amount) {
+    if (!paymentDetails) return;
+    const w = chosenWallet();
+    paymentDetails.hidden = !w;
+    if (!w) return;
+    paymentDetails.innerHTML = `
+      <p>Send <strong>${money(amount)}</strong> to Bella's ${esc(w.name)}:</p>
+      <p class="pay__account"><strong>${esc(w.number)}</strong><span>${esc(w.accountTitle)}</span></p>
+      ${w.sample ? '<p class="pay__sample">Sample details for this demo</p>' : ''}
+      <p>Then send the payment screenshot in the same WhatsApp chat.</p>`;
   }
 
   function syncOrderType() {
@@ -529,7 +551,7 @@
     if (distanceField && B.delivery) distanceField.hidden = !delivery;
     renderTotals();
   }
-  orderForm.addEventListener('change', (e) => { if (e.target.name === 'type' || e.target.name === 'distance') syncOrderType(); });
+  orderForm.addEventListener('change', (e) => { if (['type', 'distance', 'payment'].includes(e.target.name)) syncOrderType(); });
   syncOrderType();
 
   function firstInvalid(form) {
@@ -562,15 +584,41 @@
       `Subtotal: ${money(total)}`,
       fee === null ? null : `Delivery: ${fee ? `${money(fee)} (over ${km} km)` : `Free (within ${km} km)`}`,
       fee === null ? null : `Total: ${money(total + fee)}`,
+      paymentField ? `Payment: ${chosenWallet() ? `${chosenWallet().name} (screenshot to follow)` : 'Cash'}` : null,
       `Order type: ${TYPE_LABEL[type] || type}`,
       `Name: ${name}`,
       type === 'delivery' ? `Address: ${address}` : null,
       note ? `Note: ${note}` : null
     ].filter((v) => v !== null).join('\n');
 
+    // Remember the sent order so the list can be cleared when the customer comes back (with Undo).
+    try { localStorage.setItem(SENT_STORAGE, JSON.stringify(Array.from(cart.values()))); } catch (_) { /* private mode */ }
     openWhatsApp(waUrl(message));
     toast('Opening WhatsApp…');
   });
+
+  /* After an order is sent, clear the list when the customer returns to the site. Undo puts it back. */
+  const SENT_STORAGE = 'bellas-order-sent';
+  function clearIfOrderSent() {
+    let sent = null;
+    try { sent = JSON.parse(localStorage.getItem(SENT_STORAGE) || 'null'); localStorage.removeItem(SENT_STORAGE); } catch (_) { /* ignore */ }
+    if (!sent || !cart.size) return;
+    const ids = Array.from(cart.values()).map((l) => l.id);
+    cart.clear();
+    cartChanged(false);
+    ids.forEach(refreshCardFor);
+    closeCart();
+    toast('Order sent ✓ List cleared', {
+      label: 'Undo',
+      run: () => {
+        sent.filter((l) => itemById[l.id]).forEach((l) => cart.set(cartKey(l.id, l.size), { id: l.id, size: l.size || null, qty: l.qty }));
+        cartChanged(false);
+        sent.forEach((l) => refreshCardFor(l.id));
+        toast('Order list restored');
+      }
+    });
+  }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') clearIfOrderSent(); });
 
   /* =====================================================================
      7. Table booking → WhatsApp
@@ -618,15 +666,28 @@
      ===================================================================== */
   const toastEl = $('[data-toast]');
   let toastTimer;
-  function toast(text) {
+  function toast(text, action) {     // action (optional): { label, run } shows a button, e.g. Undo
     $('span', toastEl).textContent = text;
+    const old = $('[data-toast-action]', toastEl);
+    if (old) old.remove();
+    if (action) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'toast__action';
+      btn.dataset.toastAction = '';
+      btn.textContent = action.label;
+      btn.addEventListener('click', action.run, { once: true });
+      toastEl.appendChild(btn);
+    }
+    toastEl.classList.toggle('has-action', !!action);
     toastEl.classList.add('is-visible');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), action ? 7000 : 2200);
   }
 
   /* ---------- Go ---------- */
   renderTabs();
   renderMenu();
   updateCartUI(false);
+  clearIfOrderSent();   // the page may have reloaded after WhatsApp opened in this tab
 })();

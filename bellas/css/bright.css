@@ -459,3 +459,16 @@ select.input { appearance: none; -webkit-appearance: none; padding-right: 2.5rem
 .sheet__total--sub { font-size: .92rem; }
 .sheet__total--sub span:last-child { color: var(--ink); font-weight: 700; }
 .sheet__hint { text-wrap: pretty; }
+
+/* Payment details (shown for EasyPaisa / JazzCash) */
+.pay { margin-top: .6rem; padding: .9rem 1rem; border-radius: 16px; background: var(--glow-soft); border: 1px solid #F1E3AE; font-size: .9rem; color: var(--ink-2); }
+.pay[hidden] { display: none; }
+.pay p { margin: 0 0 .4rem; }
+.pay p:last-child { margin: 0; }
+.pay__account { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .7rem; }
+.pay__account strong { font-size: 1.15rem; letter-spacing: .03em; color: var(--ink); }
+.pay__sample { display: inline-block; padding: .1rem .5rem; border-radius: 999px; background: #FDECEA; color: #A32B1E; font-size: .75rem; font-weight: 700; }
+
+/* Toast with an action button (Undo) */
+.toast.has-action { pointer-events: auto; }
+.toast__action { margin-left: .4rem; padding: .3rem .8rem; border: 0; border-radius: 999px; background: var(--glow); color: var(--ink); font-weight: 800; font-size: .85rem; }

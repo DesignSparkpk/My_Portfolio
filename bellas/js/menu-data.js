@@ -43,6 +43,12 @@ window.BELLAS = {
       freeWithinKm: 5,                   // free delivery up to this distance
       feeBeyond: 100                     // Rs, charged when the address is farther away
     },
+    // Mobile wallets shown when the customer picks online payment.
+    // [SAMPLE] Replace with Bella's real account titles and numbers, then remove "sample: true".
+    payments: [
+      { id: "easypaisa", name: "EasyPaisa", accountTitle: "Bella's (sample)", number: "03XX-XXXXXXX", sample: true },
+      { id: "jazzcash",  name: "JazzCash",  accountTitle: "Bella's (sample)", number: "03XX-XXXXXXX", sample: true }
+    ],
     credit: { name: "DesignSpark", url: "" }
   },
 
