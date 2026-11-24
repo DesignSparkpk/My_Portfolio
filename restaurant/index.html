@@ -135,6 +135,8 @@
     .cat-head p { color: var(--muted); font-size: .95rem; }
     .dishes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 820px) { .dishes { grid-template-columns: 1fr; } }
+    .dish.tappable { cursor: pointer; user-select: none; transition: border-color .2s, transform .2s; }
+    .dish.tappable:hover { transform: translateY(-2px); }
     .dish { background: var(--surface); border-radius: var(--radius-sm); padding: 1.1rem 1.25rem; box-shadow: var(--shadow);
       display: grid; grid-template-columns: 1fr auto; gap: .4rem 1.2rem; align-items: center; border: 1.5px solid transparent; transition: border-color .2s; }
     .dish.in-cart { border-color: var(--terracotta); }
@@ -499,7 +501,7 @@
         <div class="menu-cat" id="c-${slug(m.cat)}">
           <div class="cat-head"><h3>${esc(m.cat)}</h3>${m.note ? `<p>${esc(m.note)}</p>` : ""}</div>
           <div class="dishes">${m.items.map((it, i) => `
-            <article class="dish" data-item="${c}-${i}">
+            <article class="dish${m.cat === "BBQ Platters" ? ` tappable" role="button" tabindex="0" data-tap="${c}-${i}-0" aria-label="Add ${esc(it.name)}, ${rs(it.opts[0][1])}` : ""}" data-item="${c}-${i}">
               <div>
                 <div class="dish-name">${esc(it.name)}${it.tag ? `<span class="tag">${esc(it.tag)}</span>` : ""}</div>
                 ${it.desc ? `<p class="dish-desc">${esc(it.desc)}</p>` : ""}
@@ -555,7 +557,7 @@
     document.addEventListener("click", e => {
       const b = e.target.closest("button[data-key]");
       if (b) return change(b.dataset.key, Number(b.dataset.d));
-      const deal = e.target.closest("[data-tap]");   // tap anywhere on a deal card
+      const deal = e.target.closest("[data-tap]");   // tap anywhere on a deal or platter card
       if (deal) change(deal.dataset.tap, 1);
     });
     document.addEventListener("keydown", e => {
