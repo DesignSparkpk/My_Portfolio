@@ -281,6 +281,13 @@
       background: var(--terracotta); color: #fff; border: none; border-radius: 18px; padding: .7rem .7rem .7rem 1.2rem;
       box-shadow: 0 12px 30px rgba(181,83,44,.4); transition: transform .3s, opacity .3s; text-align: left; }
     .cart-bar.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+    .toast { position: fixed; z-index: 49; left: 50%; bottom: calc(16px + var(--dock-h) + 10px); transform: translate(-50%, 30px);
+      opacity: 0; pointer-events: none; width: min(440px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; background: var(--brown); color: #fff; border-radius: 18px; padding: .9rem .8rem .9rem 1.2rem; font-weight: 600;
+      box-shadow: 0 12px 30px rgba(43,22,12,.35); transition: transform .3s, opacity .3s; }
+    .toast.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+    .toast button { background: rgba(255,255,255,.12); color: var(--gold); border: none; border-radius: 12px; padding: .55rem 1rem; font-weight: 700; }
+    @media (max-width: 560px) { .toast { bottom: calc(var(--dock-h) + env(safe-area-inset-bottom) + 10px); } }
     .cart-bar small { display: block; opacity: .85; font-size: .8rem; }
     .cart-bar strong { font-size: 1.1rem; }
     .cart-bar .go { background: rgba(0,0,0,.18); padding: .6rem 1rem; border-radius: 12px; font-weight: 600; white-space: nowrap; }
@@ -635,6 +642,12 @@
     <span class="go">View order →</span>
   </button>
 
+  <!-- ---------- "Order sent" message with undo ---------- -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span>Order sent to WhatsApp ✓</span>
+    <button type="button" id="undo">Undo</button>
+  </div>
+
   <!-- ---------- Bottom dock ---------- -->
   <nav class="dock" aria-label="Quick actions">
     <a href="#menu">
@@ -960,14 +973,42 @@
         e.preventDefault();
         $("#form-error").textContent = bad === nameEl ? "Please enter your name." : "Please enter your delivery address.";
         bad.focus();
+        return;
       }
+      // Sent: reset the order once WhatsApp has opened (name, type and address are kept for next time)
+      const snapshot = [...cart], note = $("#f-note").value;
+      setTimeout(() => {
+        clearOrder();
+        $("#f-note").value = "";
+        updateSend();
+        $("#cart").close();
+        showToast(snapshot, note);
+      }, 300);
+    });
+
+    function clearOrder() {
+      [...cart.keys()].forEach(k => { cart.delete(k); change(k, 0); });
+      renderCart();
+    }
+    let toastTimer, lastOrder = null;
+    function showToast(snapshot, note) {
+      lastOrder = { snapshot, note };
+      $("#toast").classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { $("#toast").classList.remove("show"); lastOrder = null; }, 10000);
+    }
+    $("#undo").addEventListener("click", () => {
+      if (!lastOrder) return;
+      lastOrder.snapshot.forEach(([k, q]) => change(k, q));
+      $("#f-note").value = lastOrder.note;
+      updateSend();
+      lastOrder = null;
+      clearTimeout(toastTimer);
+      $("#toast").classList.remove("show");
     });
     $("#cart-close").addEventListener("click", () => $("#cart").close());
     $("#cart").addEventListener("click", e => { if (e.target.id === "cart") $("#cart").close(); });
-    $("#clear").addEventListener("click", () => {
-      [...cart.keys()].forEach(k => { cart.delete(k); change(k, 0); });
-      renderCart();
-    });
+    $("#clear").addEventListener("click", clearOrder);
 
     // Highlight the category chip for the section in view
     const io = new IntersectionObserver(entries => entries.forEach(en => {
