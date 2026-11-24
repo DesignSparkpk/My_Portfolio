@@ -1,0 +1,7 @@
+# Cloudflare Pages: keep old design versions and internal notes off the live site.
+# The files stay in GitHub; remove a line here to make that path public again.
+/classic     /  302
+/classic/*   /  302
+/glass       /  302
+/glass/*     /  302
+/README.md   /  302
