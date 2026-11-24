@@ -321,6 +321,15 @@
     .seg input:checked + span { background: var(--surface); color: var(--brown); box-shadow: 0 1px 4px rgba(43,22,12,.12); }
     .seg input:focus-visible + span { outline: 3px solid var(--gold); }
     .order-form[hidden], .field[hidden], .send[hidden] { display: none; }
+    .seg[hidden] { display: none; }
+    .pay-note { font-weight: 400; color: var(--muted); font-size: .85rem; }
+    .pay-box { background: var(--cream); border: 1px dashed #d9c6a8; border-radius: 14px; padding: .9rem 1rem; font-size: .85rem; color: var(--muted); }
+    .pay-box[hidden] { display: none; }
+    .pay-row { display: flex; align-items: center; justify-content: space-between; gap: .8rem; margin-bottom: .5rem; }
+    .pay-k { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--terracotta-dark); }
+    .pay-num { display: block; font-size: 1.2rem; color: var(--brown); letter-spacing: .02em; }
+    .pay-title { display: block; color: var(--text); }
+    .pay-copy { background: var(--brown); color: #fff; border: none; border-radius: 10px; padding: .55rem .9rem; font-weight: 600; flex: none; }
     .form-error { color: #b03a2e; font-size: .88rem; font-weight: 600; min-height: 1em; }
     .line { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding: .9rem 0; border-bottom: 1px solid var(--line); }
     .line-name { font-weight: 600; }
@@ -693,6 +702,18 @@
           <label class="field" id="addr-wrap" hidden>Delivery address
             <textarea id="f-addr" name="address" rows="2" autocomplete="street-address" placeholder="House / street / area in Haripur"></textarea>
           </label>
+          <div class="field" id="pay-field">
+            <span id="pay-label">Payment</span>
+            <div class="seg" id="pay-seg" role="radiogroup" aria-labelledby="pay-label"></div>
+            <p class="pay-note" id="pay-cash-note">Pay in cash at the counter or on delivery.</p>
+          </div>
+          <div class="pay-box" id="pay-box" hidden>
+            <div class="pay-row">
+              <div><span class="pay-k" id="pay-k">Account</span><b class="pay-num" id="pay-num"></b><span class="pay-title" id="pay-title"></span></div>
+              <button type="button" class="pay-copy" id="pay-copy">Copy</button>
+            </div>
+            <p>Pay the total to this account, then send the payment screenshot in the same WhatsApp chat.</p>
+          </div>
           <label class="field"><span>Note <span class="opt-tag">(optional)</span></span>
             <input id="f-note" name="note" placeholder="e.g. less spicy, pickup at 8 PM">
           </label>
@@ -717,6 +738,13 @@
       "Shinwari Mutton Karahi": "images/dish-mutton-karahi.webp",
       "Half Platter": "images/dish-platter.webp",
     };
+    // PAYMENT: the restaurant's own Easypaisa / JazzCash accounts. Fill in BOTH number and title
+    // to show that option in the order sheet. Leave empty to hide it (customers then see Cash only).
+    const PAYMENT = {
+      Easypaisa: { number: "", title: "" },
+      JazzCash: { number: "", title: "" },
+    };
+
     // Menu category panels: photo and a short line for categories without a note
     const CAT_INFO = {
       "Mandi": { img: "images/dish-mutton-mandi.webp" },
@@ -886,12 +914,33 @@
       return { count, sum };
     }
 
+    const WALLETS = Object.keys(PAYMENT).filter(k => PAYMENT[k].number.trim() && PAYMENT[k].title.trim());
+    const payMethod = () => (document.querySelector('input[name="pay"]:checked') || {}).value || "Cash";
+    function renderPayment() {
+      const opts = ["Cash", ...WALLETS];
+      $("#pay-seg").style.gridTemplateColumns = `repeat(${opts.length}, 1fr)`;
+      $("#pay-seg").innerHTML = opts.map((o, n) => `<label><input type="radio" name="pay" value="${o}"${n ? "" : " checked"}><span>${o}</span></label>`).join("");
+      $("#pay-seg").hidden = opts.length === 1;          // only Cash: no choice to make
+    }
+    function updatePayBox() {
+      const m = payMethod(), acct = PAYMENT[m];
+      $("#pay-cash-note").hidden = m !== "Cash";
+      $("#pay-box").hidden = !acct;
+      if (acct) {
+        $("#pay-k").textContent = m + " account";
+        $("#pay-num").textContent = acct.number;
+        $("#pay-title").textContent = acct.title;
+        $("#pay-copy").textContent = "Copy";
+      }
+    }
     const orderType = () => (document.querySelector('input[name="type"]:checked') || {}).value || "Takeaway";
     function waMessage() {
       const lines = [...cart].map(([k, q]) => { const { name, price } = lookup(k); return `${q} × ${name} = ${rs(q * price)}`; });
       const name = $("#f-name").value.trim(), addr = $("#f-addr").value.trim(), note = $("#f-note").value.trim(), type = orderType();
       const details = [`Name: ${name}`, `Order type: ${type}`];
       if (type === "Delivery") details.push(`Address: ${addr}`);
+      const pay = payMethod();
+      details.push(`Payment: ${pay}${pay === "Cash" ? "" : " (I will send the payment screenshot here)"}`);
       if (note) details.push(`Note: ${note}`);
       return ["Assalam o Alaikum! I would like to order:", "", ...lines, "", `Total: ${rs(total().sum)}`, "", ...details].join("\n");
     }
@@ -962,7 +1011,13 @@
       if (deal && e.target === deal && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); change(deal.dataset.tap, 1); }
     });
     $("#cart-bar").addEventListener("click", () => $("#cart").showModal());
-    $("#order-form").addEventListener("input", () => { $("#addr-wrap").hidden = orderType() !== "Delivery"; $("#form-error").textContent = ""; updateSend(); });
+    $("#order-form").addEventListener("input", () => { $("#addr-wrap").hidden = orderType() !== "Delivery"; $("#form-error").textContent = ""; updatePayBox(); updateSend(); });
+    $("#pay-copy").addEventListener("click", () => {
+      const num = $("#pay-num").textContent.replace(/\s/g, "");
+      (navigator.clipboard ? navigator.clipboard.writeText(num) : Promise.reject())
+        .then(() => { $("#pay-copy").textContent = "Copied ✓"; })
+        .catch(() => { $("#pay-copy").textContent = num; });
+    });
     $("#order-form").addEventListener("submit", e => e.preventDefault());
     $("#send").addEventListener("click", e => {
       const nameEl = $("#f-name"), addrEl = $("#f-addr");
@@ -1021,6 +1076,8 @@
     }), { rootMargin: "-150px 0px -60% 0px" });
 
     render();
+    renderPayment();
+    updatePayBox();
     renderSignature();
     $("#menu-search").addEventListener("input", e => filterMenu(e.target.value));
     renderCart();
