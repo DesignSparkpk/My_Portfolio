@@ -68,6 +68,7 @@
       top: 0;
       z-index: 1000;
       border-bottom: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
 
@@ -114,6 +115,8 @@
       color: #fff;
       font-size: 1.5rem;
       cursor: pointer;
+      min-width: 44px;
+      min-height: 44px;
     }
 
     /* Profile Section */
@@ -514,7 +517,7 @@
         <li><a href="#todo" class="nav-link">Task Manager</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
-      <button class="toggle-btn" id="toggleBtn">
+      <button class="toggle-btn" id="toggleBtn" aria-label="Open menu" aria-controls="navLinks">
         <i class="fa-solid fa-bars"></i>
       </button>
     </nav>
@@ -656,11 +659,35 @@
 
   <script>
     // Copy To Clipboard Toast Function
-    function copyText(text) {
-      navigator.clipboard.writeText(text);
+    function showToast(message) {
       var toast = document.getElementById("toast");
+      toast.lastChild.textContent = " " + message;
       toast.className = "show";
       setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2500);
+    }
+    // Older browsers and non-https pages have no navigator.clipboard: copy through a hidden text box instead
+    function legacyCopy(text) {
+      var box = document.createElement("textarea");
+      box.value = text;
+      box.setAttribute("readonly", "");
+      box.style.position = "fixed";
+      box.style.opacity = "0";
+      document.body.appendChild(box);
+      box.select();
+      box.setSelectionRange(0, text.length);
+      var done = false;
+      try { done = document.execCommand("copy"); } catch (e) { done = false; }
+      document.body.removeChild(box);
+      return done;
+    }
+    function copyText(text) {
+      var copied = function () { showToast("Copied to clipboard!"); };
+      var fallback = function () { if (legacyCopy(text)) copied(); else showToast("Copy failed: " + text); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(copied, fallback);
+      } else {
+        fallback();
+      }
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -683,13 +710,21 @@
         });
       });
 
-      // LocalStorage Helper Functions
+      // LocalStorage Helper Functions (fall back to memory if the browser blocks storage)
+      var memoryTasks = [];
       function getSavedTasks() {
-        return JSON.parse(localStorage.getItem("portfolio_tasks")) || [];
+        try {
+          return JSON.parse(localStorage.getItem("portfolio_tasks")) || [];
+        } catch (e) {
+          return memoryTasks.slice();
+        }
       }
 
       function saveTasks(tasks) {
-        localStorage.setItem("portfolio_tasks", JSON.stringify(tasks));
+        memoryTasks = tasks.slice();
+        try {
+          localStorage.setItem("portfolio_tasks", JSON.stringify(tasks));
+        } catch (e) { /* storage blocked: tasks last until the page is closed */ }
       }
 
       function checkEmpty() {
