@@ -296,21 +296,19 @@
     .cart-bar .go { background: rgba(0,0,0,.18); padding: .6rem 1rem; border-radius: 12px; font-weight: 600; white-space: nowrap; }
     @media (max-width: 560px) { .cart-bar { bottom: calc(var(--dock-h) + env(safe-area-inset-bottom) + 10px); } }
 
-    /* ---------- Cart dialog ---------- */
-    dialog#cart { border: none; padding: 0; background: var(--bg); color: var(--text);
-      width: 100%; max-width: 100%; max-height: 85vh; margin: auto auto 0; border-radius: 22px 22px 0 0; }
-    dialog#cart::backdrop { background: rgba(35,20,12,.5); }
-    dialog#cart:not([open]) { display: none; }
-    /* Fallback for browsers without <dialog> support (older iPhones and Android browsers) */
-    dialog#cart.fallback-open { display: block; position: fixed; z-index: 100; left: 0; right: 0; bottom: 0; }
+    /* ---------- Order sheet (a plain overlay: works on every browser, old iPhones included) ---------- */
+    #cart { position: fixed; z-index: 100; left: 0; right: 0; bottom: 0; background: var(--bg); color: var(--text);
+      max-height: 85vh; max-height: 85dvh; display: flex; flex-direction: column; border-radius: 22px 22px 0 0;
+      box-shadow: 0 -10px 40px rgba(35,20,12,.25); }
+    #cart[hidden] { display: none; }
     .cart-backdrop { position: fixed; inset: 0; z-index: 99; background: rgba(35,20,12,.5); }
     .cart-backdrop[hidden] { display: none; }
     body.cart-open { overflow: hidden; }
     @media (min-width: 768px) {
-      dialog#cart { width: 430px; height: 100vh; max-height: 100vh; margin: 0 0 0 auto; border-radius: 22px 0 0 22px; }
-      dialog#cart.fallback-open { left: auto; top: 0; }
+      #cart { left: auto; top: 0; width: 430px; max-height: none; border-radius: 22px 0 0 22px; }
     }
-    .cart-inner { display: flex; flex-direction: column; height: 100%; max-height: inherit; }
+    .cart-inner { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+    .cart-scroll { -webkit-overflow-scrolling: touch; min-height: 0; }
     .cart-head { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--line); }
     .cart-head h2 { font-family: var(--font-display); font-size: 1.5rem; color: var(--brown); }
     .close { background: var(--cream); border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.1rem; }
@@ -652,7 +650,7 @@
           </ul>
         </div>
       </div>
-      <div class="foot-bottom">© Al Arabian Mandi &amp; Shinwari House, Haripur · <span id="site-version">v 25 Nov 2026</span></div>
+      <div class="foot-bottom">© Al Arabian Mandi &amp; Shinwari House, Haripur · <span id="site-version">v 25 Nov 2026 (2)</span></div>
     </div>
   </footer>
 
@@ -688,9 +686,9 @@
     </a>
   </nav>
 
-  <!-- ---------- Cart dialog ---------- -->
+  <!-- ---------- Order sheet ---------- -->
   <div class="cart-backdrop" id="cart-backdrop" hidden></div>
-  <dialog id="cart" aria-labelledby="cart-title" aria-modal="true">
+  <div id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
     <div class="cart-inner">
       <div class="cart-head">
         <h2 id="cart-title">Your order</h2>
@@ -738,10 +736,29 @@
         <button class="clear" type="button" id="clear">Clear order</button>
       </div>
     </div>
-  </dialog>
+  </div>
 
   <script>
     document.documentElement.classList.add("js");
+
+    // Diagnostics: open the site with #debug at the end of the address to see browser info and any errors
+    const DEBUG = location.hash === "#debug";
+    const debugLines = [];
+    function debugLog(msg) {
+      if (!DEBUG) return;
+      debugLines.push(new Date().toTimeString().slice(0, 8) + "  " + msg);
+      let box = document.getElementById("debug-box");
+      if (!box) {
+        box = document.createElement("pre");
+        box.id = "debug-box";
+        box.style.cssText = "position:fixed;top:auto;bottom:8px;left:8px;right:8px;z-index:999;max-height:22vh;overflow:auto;margin:0;padding:10px;" +
+          "background:rgba(0,0,0,.85);color:#7CFC9A;font:12px/1.4 monospace;white-space:pre-wrap;border-radius:10px;pointer-events:none;opacity:.9";
+        document.body.appendChild(box);
+      }
+      box.textContent = debugLines.join("\n");
+    }
+    window.addEventListener("error", e => debugLog("ERROR: " + e.message + " (line " + e.lineno + ")"));
+    window.addEventListener("unhandledrejection", e => debugLog("ERROR: " + (e.reason && e.reason.message || e.reason)));
 
     // PHOTOS: signature-card photos (from the restaurant's own videos), keyed by dish name.
     // Empty or missing = card shows without a photo.
@@ -1022,27 +1039,22 @@
       const deal = e.target.closest && e.target.closest("[data-tap]");
       if (deal && e.target === deal && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); change(deal.dataset.tap, 1); }
     });
-    // Open/close the order sheet: native <dialog> where supported, a simple overlay elsewhere
+    // Order sheet: a plain overlay (no <dialog>), so it opens the same on every phone and browser
     const cartEl = $("#cart");
-    const nativeDialog = typeof cartEl.showModal === "function";
     function openCart() {
-      if (nativeDialog) { try { if (!cartEl.open) cartEl.showModal(); return; } catch (err) { /* fall through */ } }
-      cartEl.setAttribute("open", "");
-      cartEl.classList.add("fallback-open");
+      cartEl.hidden = false;
       $("#cart-backdrop").hidden = false;
       document.body.classList.add("cart-open");
+      $("#cart-close").focus({ preventScroll: true });
     }
     function closeCart() {
-      if (cartEl.classList.contains("fallback-open")) {
-        cartEl.removeAttribute("open");
-        cartEl.classList.remove("fallback-open");
-        $("#cart-backdrop").hidden = true;
-        document.body.classList.remove("cart-open");
-      } else if (nativeDialog && cartEl.open) cartEl.close();
+      cartEl.hidden = true;
+      $("#cart-backdrop").hidden = true;
+      document.body.classList.remove("cart-open");
     }
-    $("#cart-bar").addEventListener("click", openCart);
+    $("#cart-bar").addEventListener("click", () => { debugLog("View order tapped"); openCart(); debugLog("Sheet open: " + !cartEl.hidden); });
     $("#cart-backdrop").addEventListener("click", closeCart);
-    document.addEventListener("keydown", e => { if (e.key === "Escape" && cartEl.classList.contains("fallback-open")) closeCart(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && !cartEl.hidden) closeCart(); });
     $("#order-form").addEventListener("input", () => { $("#addr-wrap").hidden = orderType() !== "Delivery"; $("#form-error").textContent = ""; updatePayBox(); updateSend(); });
     $("#pay-copy").addEventListener("click", () => {
       const num = $("#pay-num").textContent.replace(/\s/g, "");
@@ -1095,7 +1107,6 @@
       $("#toast").classList.remove("show");
     });
     $("#cart-close").addEventListener("click", closeCart);
-    cartEl.addEventListener("click", e => { if (e.target === cartEl) closeCart(); });
     $("#clear").addEventListener("click", clearOrder);
 
     // Highlight the category chip for the section in view
@@ -1108,6 +1119,9 @@
       });
     }), { rootMargin: "-150px 0px -60% 0px" });
 
+    debugLog("Version: " + $("#site-version").textContent);
+    debugLog("Browser: " + navigator.userAgent);
+    debugLog("Screen: " + innerWidth + "x" + innerHeight);
     render();
     renderPayment();
     updatePayBox();
