@@ -340,7 +340,8 @@
     .pay-num { display: block; font-size: 1.2rem; color: var(--brown); letter-spacing: .02em; }
     .pay-title { display: block; color: var(--text); }
     .pay-copy { background: var(--brown); color: #fff; border: none; border-radius: 10px; padding: .55rem .9rem; font-weight: 600; flex: none; }
-    .form-error { color: #b03a2e; font-size: .88rem; font-weight: 600; min-height: 1em; }
+    .form-error { color: #b03a2e; font-size: .9rem; font-weight: 600; margin: -.4rem 0 .7rem; }
+    .form-error:empty { display: none; }
     .line { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding: .9rem 0; border-bottom: 1px solid var(--line); }
     .line-name { font-weight: 600; }
     .line-meta { color: var(--muted); font-size: .85rem; }
@@ -728,11 +729,11 @@
           <label class="field"><span>Note <span class="opt-tag">(optional)</span></span>
             <input id="f-note" name="note" placeholder="e.g. less spicy, pickup at 8 PM">
           </label>
-          <p class="form-error" id="form-error" role="alert"></p>
         </form>
       </div>
       <div class="cart-foot">
         <div class="sum"><span>Total</span><span id="sum-total">Rs 0</span></div>
+        <p class="form-error" id="form-error" role="alert"></p>
         <a class="btn send" id="send" target="_blank" rel="noopener" href="#">Send order on WhatsApp</a>
         <button class="clear" type="button" id="clear">Clear order</button>
       </div>
@@ -1058,7 +1059,8 @@
       if (bad) {
         e.preventDefault();
         $("#form-error").textContent = bad === nameEl ? "Please enter your name." : "Please enter your delivery address.";
-        bad.focus();
+        bad.scrollIntoView({ block: "center", behavior: "smooth" });
+        bad.focus({ preventScroll: true });
         return;
       }
       // Sent: reset the order once WhatsApp has opened (name, type and address are kept for next time)
