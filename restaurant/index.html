@@ -300,8 +300,15 @@
     dialog#cart { border: none; padding: 0; background: var(--bg); color: var(--text);
       width: 100%; max-width: 100%; max-height: 85vh; margin: auto auto 0; border-radius: 22px 22px 0 0; }
     dialog#cart::backdrop { background: rgba(35,20,12,.5); }
+    dialog#cart:not([open]) { display: none; }
+    /* Fallback for browsers without <dialog> support (older iPhones and Android browsers) */
+    dialog#cart.fallback-open { display: block; position: fixed; z-index: 100; left: 0; right: 0; bottom: 0; }
+    .cart-backdrop { position: fixed; inset: 0; z-index: 99; background: rgba(35,20,12,.5); }
+    .cart-backdrop[hidden] { display: none; }
+    body.cart-open { overflow: hidden; }
     @media (min-width: 768px) {
       dialog#cart { width: 430px; height: 100vh; max-height: 100vh; margin: 0 0 0 auto; border-radius: 22px 0 0 22px; }
+      dialog#cart.fallback-open { left: auto; top: 0; }
     }
     .cart-inner { display: flex; flex-direction: column; height: 100%; max-height: inherit; }
     .cart-head { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--line); }
@@ -681,7 +688,8 @@
   </nav>
 
   <!-- ---------- Cart dialog ---------- -->
-  <dialog id="cart" aria-labelledby="cart-title">
+  <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+  <dialog id="cart" aria-labelledby="cart-title" aria-modal="true">
     <div class="cart-inner">
       <div class="cart-head">
         <h2 id="cart-title">Your order</h2>
@@ -1013,7 +1021,27 @@
       const deal = e.target.closest && e.target.closest("[data-tap]");
       if (deal && e.target === deal && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); change(deal.dataset.tap, 1); }
     });
-    $("#cart-bar").addEventListener("click", () => $("#cart").showModal());
+    // Open/close the order sheet: native <dialog> where supported, a simple overlay elsewhere
+    const cartEl = $("#cart");
+    const nativeDialog = typeof cartEl.showModal === "function";
+    function openCart() {
+      if (nativeDialog) { try { if (!cartEl.open) cartEl.showModal(); return; } catch (err) { /* fall through */ } }
+      cartEl.setAttribute("open", "");
+      cartEl.classList.add("fallback-open");
+      $("#cart-backdrop").hidden = false;
+      document.body.classList.add("cart-open");
+    }
+    function closeCart() {
+      if (cartEl.classList.contains("fallback-open")) {
+        cartEl.removeAttribute("open");
+        cartEl.classList.remove("fallback-open");
+        $("#cart-backdrop").hidden = true;
+        document.body.classList.remove("cart-open");
+      } else if (nativeDialog && cartEl.open) cartEl.close();
+    }
+    $("#cart-bar").addEventListener("click", openCart);
+    $("#cart-backdrop").addEventListener("click", closeCart);
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && cartEl.classList.contains("fallback-open")) closeCart(); });
     $("#order-form").addEventListener("input", () => { $("#addr-wrap").hidden = orderType() !== "Delivery"; $("#form-error").textContent = ""; updatePayBox(); updateSend(); });
     $("#pay-copy").addEventListener("click", () => {
       const num = $("#pay-num").textContent.replace(/\s/g, "");
@@ -1039,7 +1067,7 @@
         clearOrder();
         $("#f-note").value = "";
         updateSend();
-        $("#cart").close();
+        closeCart();
         showToast(snapshot, note);
       }, 300);
     });
@@ -1064,8 +1092,8 @@
       clearTimeout(toastTimer);
       $("#toast").classList.remove("show");
     });
-    $("#cart-close").addEventListener("click", () => $("#cart").close());
-    $("#cart").addEventListener("click", e => { if (e.target.id === "cart") $("#cart").close(); });
+    $("#cart-close").addEventListener("click", closeCart);
+    cartEl.addEventListener("click", e => { if (e.target === cartEl) closeCart(); });
     $("#clear").addEventListener("click", clearOrder);
 
     // Highlight the category chip for the section in view
